@@ -1,16 +1,18 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
    <title>@yield('title')</title>
-   <style>
-   </style>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
    <h1>@yield('title')</h1>
    @section('menubar')
-   <h2 class="menutitle">※メニュー</h2>
-   <ul>
-       <li>@show</li>
-   </ul>
+   <div class="menubar">
+      <ul>
+          <li>@show</li>
+      </ul>
+   </div>
    <div class="content">
    @yield('content')
    </div>
