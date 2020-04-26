@@ -5,10 +5,13 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use BenSampo\Enum\Traits\CastsEnums;
+use App\Enums\Gender;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use CastsEnums;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'gender',
     ];
 
     /**
@@ -35,5 +38,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'gender' => 'int',
+    ];
+    
+    
+    protected $enumCasts = [
+        'gender' => Gender::class,
     ];
 }
