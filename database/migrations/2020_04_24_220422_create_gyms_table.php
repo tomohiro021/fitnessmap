@@ -14,14 +14,6 @@ class CreateGymsTable extends Migration
     public function up()
     {
         Schema::create('gyms', function (Blueprint $table) {
-            $table->string('name');
-            $table->string('zip-code');
-            $table->string('address1');
-            $table->string('address2');
-            $table->decimal('lat');
-            $table->decimal('lng');
-            $table->text('summary');
-            $table->text('detail');
             $table->id();
             $table->timestamps();
         });

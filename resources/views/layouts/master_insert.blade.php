@@ -8,8 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
-    <!--<title>{{ config('app.name', 'Laravel') }}</title>-->
-
+    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
@@ -46,9 +45,6 @@ Navbar
   <p class="text-muted">@yield('title')</p>
   </div>
 </footer>
- 
-<!-- Bootstrap core JavaScript
-  ================================================== -->
  
 @yield('scripts')
 </body>

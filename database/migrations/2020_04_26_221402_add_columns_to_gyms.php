@@ -15,7 +15,7 @@ class AddColumnsToGyms extends Migration
     {
         Schema::table('gyms', function (Blueprint $table) {
             $table->string('name');
-            $table->string('zip-code');
+            $table->string('zip_code');
             $table->string('address1');
             $table->string('address2');
             $table->decimal('lat');
@@ -34,7 +34,7 @@ class AddColumnsToGyms extends Migration
     {
         Schema::table('gyms', function (Blueprint $table) {
             $table->dropColumn('name');
-            $table->dropColumn('zip-code');
+            $table->dropColumn('zip_code');
             $table->dropColumn('address1');
             $table->dropColumn('address2');
             $table->dropColumn('lat');
