@@ -25,3 +25,15 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('main','MainController@index');
+
+# 入力画面
+Route::get('request/', [
+  'uses' => 'InsertDemoController@getIndex',
+  'as' => 'insert.index'
+]);
+ 
+# 確認画面
+Route::post('request/confirm', [
+  'uses' => 'InsertDemoController@confirm',
+  'as' => 'insert.confirm'
+]);

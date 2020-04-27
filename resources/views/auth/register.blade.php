@@ -29,7 +29,7 @@
                             <label for="gender" class="col-md-4 col-form-label text-md-right">性別</label>
  
                             <div class="col-md-6">
-                                <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender" autofocus>
+                                <!--<input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender" autofocus>-->
                                 {{ Form::select(
                                     'gender',
                                     App\Enums\Gender::toSelectArray()

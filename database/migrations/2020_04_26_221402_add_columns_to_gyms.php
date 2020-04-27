@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGymsTable extends Migration
+class AddColumnsToGyms extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGymsTable extends Migration
      */
     public function up()
     {
-        Schema::create('gyms', function (Blueprint $table) {
+        Schema::table('gyms', function (Blueprint $table) {
             $table->string('name');
             $table->string('zip-code');
             $table->string('address1');
@@ -22,8 +22,6 @@ class CreateGymsTable extends Migration
             $table->decimal('lng');
             $table->text('summary');
             $table->text('detail');
-            $table->id();
-            $table->timestamps();
         });
     }
 
@@ -34,6 +32,15 @@ class CreateGymsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gyms');
+        Schema::table('gyms', function (Blueprint $table) {
+            $table->dropColumn('name');
+            $table->dropColumn('zip-code');
+            $table->dropColumn('address1');
+            $table->dropColumn('address2');
+            $table->dropColumn('lat');
+            $table->dropColumn('lng');
+            $table->dropColumn('summary');
+            $table->dropColumn('detail');
+        });
     }
 }
