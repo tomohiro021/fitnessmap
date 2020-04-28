@@ -3,8 +3,8 @@
  
 @section('content')
 <div class="text-center">
-  <h3>店舗登録画面</h3>
-  <p>入力画面 -> <span class="badge badge-success">確認画面</span> -> 完了画面</p>
+  <h2>店舗登録画面</h2>
+  <p>入力画面 -> <strong>確認画面</strong> -> 完了画面</p>
 </div>
  
 <form action="{{ route('insert.complete') }}" method="POST" class="form-horizontal">
