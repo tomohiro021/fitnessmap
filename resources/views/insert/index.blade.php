@@ -7,7 +7,7 @@
   <p><strong>入力画面</strong> -> 確認画面 -> 完了画面</p>
 </div>
  
-<form action="{{ route('insert.confirm') }}" method="POST" class="form-horizontal">
+<form action="{{ route('insert.confirm') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
   @csrf
   <div class="form-group col-md-6">
     <label for="name">店舗名</label>
@@ -37,13 +37,11 @@
         <p class="error-message">{{ $errors->first('address2') }}</p>
     @endif
   </div>
-  <!--<form action="" method="POST" enctype="multipart/form-data">-->
-  <!--  <div class="form-group col-md-6">-->
-  <!--    <label for="image">施設紹介画像の添付</label>-->
-  <!--    <input type="file" class="form-control-file" id="image" name="image[]" size="40" accept="image/*" multiple>-->
-  <!--    <p>※複数登録可能</p>-->
-  <!--  </div>-->
-  <!--</form>-->
+  <div class="form-group col-md-6">
+    <label for="image">施設紹介画像の添付</label>
+    <input type="file" class="form-control-file" id="image" name="image[]" size="40" accept="image/*" multiple>
+    <p>※複数添付可能</p>
+  </div>
   <div class="form-group col-md-10">
     <label for="summary">説明文</label>
     <textarea id="summary" name="summary" rows="8" cols="80" class="form-control" >{{ old('summary') }}</textarea>
@@ -61,7 +59,7 @@
   
   <div class="form-group">
     <div class="text-center">
-      <input type="submit" value="送信" class="btn btn-primary flex-fill flex-md-grow-0" />
+      <input type="submit" name="button1" value="送信" class="btn btn-primary flex-fill flex-md-grow-0" formmethod="POST">
     </div>
   </div>
 </form>

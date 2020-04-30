@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
@@ -10,8 +10,8 @@
     <title>@yield('title')</title>
     
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -46,6 +46,5 @@ Navbar
   </div>
 </footer>
  
-@yield('scripts')
 </body>
 </html>

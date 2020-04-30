@@ -148,6 +148,12 @@ return [
     'attributes' => [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'name' => '店舗名',
+        'zip_code' => '郵便番号',
+        'address1' => '都道府県',
+        'address2' => '以降の住所',
+        'summary' => '説明文',
+        'detail' => '詳細説明',
     ],
 
 ];

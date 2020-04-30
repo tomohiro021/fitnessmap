@@ -7,9 +7,8 @@
   <p>入力画面 -> <strong>確認画面</strong> -> 完了画面</p>
 </div>
  
-<form action="{{ route('insert.complete') }}" method="POST" class="form-horizontal">
+<form action="{{ route('insert.complete') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
   @csrf
- 
   <div class="form-group">
     <label class="col-md-2 control-label" for="name">店舗名</label>
     <input type="hidden" name="name" value="{{ $inputs['name'] }}">
@@ -42,7 +41,7 @@
   </div>
   <div class="form-group">
     <div class="col-md-2">
-      <input type="submit" value="登録" class="btn btn-primary flex-fill flex-md-grow-0" />
+      <input type="submit" value="登録する" class="btn btn-primary flex-fill flex-md-grow-0" formmethod="POST">
     </div>
   </div>
 </form>
