@@ -10,7 +10,7 @@
     <title>@yield('title')</title>
     
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 
     <!-- Fonts -->
@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
  
@@ -38,7 +38,7 @@ Navbar
  
 <div class="container" style="margin-top: 40px;">
     @yield('content')
-</div><!-- /.container -->
+</div>
  
 <footer class="footer">
   <div class="container">

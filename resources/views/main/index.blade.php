@@ -1,12 +1,18 @@
 @extends('layouts.mainapp')
 
-@section('title','FitnessMap')
-
-@section('menubar')
-@endsection
-
 @section('content')
-@endsection
-
-@section('footer')
+<div class="container">
+    <img src="images/stretching.jpg" class="img-fluid"　alt="ストレッチイラスト">
+    <div class="row">
+      <div class="col-sm">
+        3つの列の1列目
+      </div>
+      <div class="col-sm">
+        3つの列の2列目
+      </div>
+      <div class="col-sm">
+        3つの列の3列目
+      </div>
+    </div>
+</div>
 @endsection

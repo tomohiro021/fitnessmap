@@ -16,16 +16,16 @@
       <p class="error-message">{{ $errors->first('name') }}</p>
     @endif
   </div>
-  <div class="col-md-2">
-    <label for="zip_code">郵便番号（７桁）</label>
-    <input type="text" class="form-control" id="zip_code" name="zip_code" size="10" placeholder="ハイフン無し" value="{{ old('zip_code') }}" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','address1','address2');"> 
+  <div class="form-group col-md-4">
+    <label for="zip_code">郵便番号（ハイフンなし）</label>
+    <input type="text" class="form-control" id="zip_code" name="zip_code" size="40" placeholder="1234567" value="{{ old('zip_code') }}" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','address1','address2');"> 
     @if ($errors->has('zip_code'))
         <p class="error-message">{{ $errors->first('zip_code') }}</p>
     @endif
   </div>
-  <div class="col-md-3">
+  <div class="form-group col-md-4">
     <label for="address1">都道府県</label>
-    <input type="text" class="form-control" id="address1" name="address1" size="20" placeholder="都道府県を入力" value="{{ old('address1') }}">
+    <input type="text" class="form-control" id="address1" name="address1" size="40" placeholder="自動入力" value="{{ old('address1') }}">
     @if ($errors->has('address1'))
         <p class="error-message">{{ $errors->first('address1') }}</p>
     @endif
@@ -37,6 +37,17 @@
         <p class="error-message">{{ $errors->first('address2') }}</p>
     @endif
   </div>
+  <form action="cgi-bin/abc.cgi" method="POST" enctype="multipart/form-data">
+    <div class="form-group col-md-6">
+      <label for="datafile">施設紹介画像</label>
+      <p>
+      <input type="file" class="form-control" id="datafile" name="datafile" size="40" placeholder="" value="{{ old('datafile') }}">
+      </p>
+      @if ($errors->has('datafile'))
+          <p class="error-message">{{ $errors->first('datafile') }}</p>
+      @endif
+    </div>
+  </form>
   <div class="form-group col-md-10">
     <label for="summary">説明文</label>
     <textarea id="summary" name="summary" rows="8" cols="80" class="form-control" >{{ old('summary') }}</textarea>
@@ -54,7 +65,7 @@
   
   <div class="form-group">
     <div class="text-center">
-      <input type="submit" value="送信" class="btn btn-primary btn-wide" />
+      <input type="submit" value="送信" class="btn btn-primary flex-fill flex-md-grow-0" />
     </div>
   </div>
 </form>
