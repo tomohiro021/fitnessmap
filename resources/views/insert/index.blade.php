@@ -37,17 +37,13 @@
         <p class="error-message">{{ $errors->first('address2') }}</p>
     @endif
   </div>
-  <form action="cgi-bin/abc.cgi" method="POST" enctype="multipart/form-data">
-    <div class="form-group col-md-6">
-      <label for="datafile">施設紹介画像</label>
-      <p>
-      <input type="file" class="form-control" id="datafile" name="datafile" size="40" placeholder="" value="{{ old('datafile') }}">
-      </p>
-      @if ($errors->has('datafile'))
-          <p class="error-message">{{ $errors->first('datafile') }}</p>
-      @endif
-    </div>
-  </form>
+  <!--<form action="" method="POST" enctype="multipart/form-data">-->
+  <!--  <div class="form-group col-md-6">-->
+  <!--    <label for="image">施設紹介画像の添付</label>-->
+  <!--    <input type="file" class="form-control-file" id="image" name="image[]" size="40" accept="image/*" multiple>-->
+  <!--    <p>※複数登録可能</p>-->
+  <!--  </div>-->
+  <!--</form>-->
   <div class="form-group col-md-10">
     <label for="summary">説明文</label>
     <textarea id="summary" name="summary" rows="8" cols="80" class="form-control" >{{ old('summary') }}</textarea>

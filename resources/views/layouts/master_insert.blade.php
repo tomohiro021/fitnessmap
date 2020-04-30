@@ -42,7 +42,7 @@ Navbar
  
 <footer class="footer">
   <div class="container">
-  <p class="text-muted">@yield('title')</p>
+  <p class="text-muted"><small>&copy; 2020 FitnessMap</small></p>
   </div>
 </footer>
  
