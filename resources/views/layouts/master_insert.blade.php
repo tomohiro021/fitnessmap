@@ -10,8 +10,8 @@
     <title>@yield('title')</title>
     
     <!-- Scripts -->
+    <!--<script src="{{ mix('js/app.js') }}" defer></script>-->
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
-    <script src="{{ mix('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -39,6 +39,7 @@ Navbar
 <div class="container" style="margin-top: 40px;">
     @yield('content')
 </div>
+</body>
  
 <footer class="footer">
   <div class="container">
@@ -46,5 +47,4 @@ Navbar
   </div>
 </footer>
  
-</body>
 </html>

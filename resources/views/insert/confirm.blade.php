@@ -37,7 +37,7 @@
   <div class="form-group">
     <label class="col-md-2 control-label" for="detail">詳細説明</label>
     <input type="hidden" name="detail" value="{{ $inputs['detail'] }}">
-    <div class="col-md-210">{{ $inputs['detail'] }}</div>
+    <div class="col-md-10">{{ $inputs['detail'] }}</div>
   </div>
   <div class="form-group">
     <div class="col-md-2">

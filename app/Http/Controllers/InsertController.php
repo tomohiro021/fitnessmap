@@ -17,9 +17,9 @@ class InsertController extends Controller
       //バリデーションを実行（結果に問題があれば処理を中断してエラーを返す）
       $request->validate([
          'name' => 'required',
-         'zip-code' => 'required',
-         'adress1'  => 'required',
-         'adress2'  => 'required',
+         'zip_code' => 'required',
+         'address1'  => 'required',
+         'address2'  => 'required',
          'summary'  => 'required',
          'detail'  => 'required',
       ]);
