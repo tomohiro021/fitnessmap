@@ -34,3 +34,4 @@ Route::post('/insert/confirm', 'InsertController@confirm')->name('insert.confirm
 
 //送信完了ページ
 Route::post('/insert/complete', 'InsertController@complete')->name('insert.complete');
+// Route::post('/insert', 'InsertController@index')->name('insert.index');

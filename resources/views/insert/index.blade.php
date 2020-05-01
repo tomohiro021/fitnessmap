@@ -9,35 +9,35 @@
  
 <form action="{{ route('insert.confirm') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
   @csrf
-  <div class="form-group col-md-6">
+  <div class="form-group col-md-10">
     <label for="name">店舗名</label>
     <input id="name" type="text" class="form-control"  name="name" placeholder="店舗名を入力してください" value="{{ old('name') }}">
     @if ($errors->has('name'))
       <p class="error-message">{{ $errors->first('name') }}</p>
     @endif
   </div>
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-10">
     <label for="zip_code">郵便番号（ハイフンなし）</label>
     <input type="text" class="form-control" id="zip_code" name="zip_code" size="40" placeholder="1234567" value="{{ old('zip_code') }}" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','address1','address2');"> 
     @if ($errors->has('zip_code'))
         <p class="error-message">{{ $errors->first('zip_code') }}</p>
     @endif
   </div>
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-10">
     <label for="address1">都道府県</label>
     <input type="text" class="form-control" id="address1" name="address1" size="40" placeholder="自動入力" value="{{ old('address1') }}">
     @if ($errors->has('address1'))
         <p class="error-message">{{ $errors->first('address1') }}</p>
     @endif
   </div>
-  <div class="form-group col-md-6">
+  <div class="form-group col-md-10">
     <label for="address2">以降の住所</label>
     <input type="text" class="form-control" id="address2" name="address2" size="40" placeholder="区市町村以降を入力してください" value="{{ old('address2') }}">
     @if ($errors->has('address2'))
         <p class="error-message">{{ $errors->first('address2') }}</p>
     @endif
   </div>
-  <div class="form-group col-md-6">
+  <div class="form-group col-md-4">
     <label for="image">施設紹介画像の添付</label>
     <input type="file" class="form-control-file" id="image" name="image[]" size="40" accept="image/*" multiple>
     <p>※複数添付可能</p>

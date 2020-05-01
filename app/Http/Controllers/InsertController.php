@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Gym;
 
 class InsertController extends Controller
 {
@@ -35,6 +36,19 @@ class InsertController extends Controller
     
    public function complete(Request $request)
    {
+      //フォームから受け取ったすべてのinputの値を取得
+      $inputs = $request->all();
+      
+      // 新しいレコードの追加
+      #Greetingモデルクラスのオブジェクトを作成
+      $gym = new Gym();
+ 
+      #Greetingモデルクラスのプロパティに値を代入
+      $gym->fillable = $request->all();
+      
+      #Greetingモデルクラスのsaveメソッドを実行
+      //$gym->save();
+      
       //送信完了ページのviewを表示
       return view('insert.complete');
    }
