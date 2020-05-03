@@ -42,7 +42,7 @@
     <span class="text-primary"><div class="col-md-10">{{ $inputs['address2'] }}</div></span>
   </div>
     <div class="form-group">
-    <label class="col-md-2 control-label" for="img">選択した画像ファイル</label>
+    <label class="col-md-2 control-label" for="img">施設の写真トップ画</label>
     <input type="hidden" name="img1" value="$_FILES['img1'] ['name']">
     <input type="hidden" name="img2" value="$_FILES['img2'] ['name']">
     <input type="hidden" name="img3" value="$_FILES['img3'] ['name']">

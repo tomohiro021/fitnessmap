@@ -8,5 +8,5 @@ class MainController extends Controller
 {
     public function index(Request $request) {
         return view('main.index');
-    }//
+    }
 }

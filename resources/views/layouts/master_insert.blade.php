@@ -31,7 +31,7 @@ Navbar
   <!-- スマートフォンサイズで表示されるメニューボタンとテキスト -->
   <div class="navbar-header">
   <!-- タイトルなどのテキスト -->
-  <a class="navbar-brand" href="#">@yield('title')</a>
+  <a class="navbar-brand" href="{{ route('main.index') }}">@yield('title')</a>
   </div>
   </div>
 </nav>

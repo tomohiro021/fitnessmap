@@ -1,4 +1,4 @@
-<footer>
+ <footer class="footer">
     <div class="container">
         <ui class="float-right list-inline text-muted my-2">
             <li class="list-inline-item">

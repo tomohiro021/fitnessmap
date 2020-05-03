@@ -46,7 +46,7 @@
     <input type="text" class="form-control" id="address2" name="address2" size="40" placeholder="区市町村以降を入力してください" value="{{ old('address2') }}">
   </div>
   <div class="form-group col-md-4">
-    <label for="img">紹介画像ファイル</label>
+    <label for="img">施設の写真トップ画</label>
     <input type="file" class="form-control-file" id="img1" name="img1" size="40" accept="image/*" ><!--multiple-->
     <input type="file" class="form-control-file" id="img2" name="img2" size="40" accept="image/*" ><!--multiple-->
     <input type="file" class="form-control-file" id="img3" name="img3" size="40" accept="image/*" ><!--multiple-->
