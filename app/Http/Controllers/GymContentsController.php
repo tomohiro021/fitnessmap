@@ -4,17 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gym;
-use Illuminate\Support\Facades\Storage;
 
-class InsertController extends Controller
+class GymContentsController extends Controller
 {
-   public function index()
+    public function home()
    {
       //フォーム入力画ページのviewを表示
-      return view('insert.index');
+      return view('gym.home');
    }
-
-   public function confirm(Request $request)
+    public function info()
+   {
+      //フォーム入力画ページのviewを表示
+      return view('gym.info');
+   }
+    public function form()
+   {
+      //フォーム入力画ページのviewを表示
+      return view('gym.form');
+   }
+    
+   public function complete(Request $request)
    {
       //バリデーションを実行（結果に問題があれば処理を中断してエラーを返す）
       $request->validate([
@@ -27,28 +36,15 @@ class InsertController extends Controller
          'lat'  => 'required',
          'lng'  => 'required',
          'img1'  => 'image',
-         'img2'  => 'image',
-         'lmg3'  => 'image',
       ]);
       
-      //フォームから受け取ったすべてのinputの値を取得
-      $inputs = $request->all();
+      // アップロードしたファイル名を取得
+      $upload_name = $_FILES['img1']['name'];
+      //アップロードに成功しているか確認　>>>　保存
+      if ($request->file('img1')->isValid([])) {
+          $filename = $request->file('img1')->storeAs('', $upload_name, 'public');
+      }
       
-      // // アップロードしたファイル名を取得
-      // $upload_name = $_FILES['img1']['name'];
-      // //アップロードに成功しているか確認　>>>　保存
-      // if ($request->file('img1')->isValid([])) {
-      //     $filename = $request->file('img1')->storeAs('', $upload_name, 'public');
-      // }
-      
-      //入力内容確認ページのviewに変数を渡して表示
-      return view('insert.confirm', [
-         'inputs' => $inputs,
-      ]);
-   }
-    
-   public function complete(Request $request)
-   {
       // 新しいレコードの追加
       #Gymモデルクラスのオブジェクトを作成
       $gym = new Gym();
@@ -69,6 +65,6 @@ class InsertController extends Controller
       $gym->save();
       
       //送信完了ページのviewを表示
-      return view('insert.complete');
+      return view('gym.complete');
    }
 }

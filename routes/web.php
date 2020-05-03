@@ -24,20 +24,13 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index')->name('home.index');
-
-Route::get('/main', 'MainController@index')->name('main.index');
-
-Route::get('/shop', 'ShopController@index')->name('shop.index');
-Route::get('/shop/access', 'ShopController@access')->name('shop.access');
-Route::get('/shop/price', 'ShopController@price')->name('shop.price');
-Route::get('/shop/img', 'ShopController@img')->name('shop.img');
-
+// Route::get('/home', 'HomeController@index')->name('home.index');
+//ホームページ
+Route::get('/home', 'GymContentsController@home')->name('gym.home');
+//店舗紹介ページ
+Route::get('/info', 'GymContentsController@info')->name('gym.info');
 //店舗入力ページ
-Route::get('/insert', 'InsertController@index')->name('insert.index');
-//確認ページ
-Route::post('/insert/confirm', 'InsertController@confirm')
-    ->name('insert.confirm')->middleware('FileUpload');
+Route::get('/form', 'GymContentsController@form')->name('gym.form');
 //送信完了ページ
-Route::post('/insert/complete', 'InsertController@complete')->name('insert.complete');
+Route::post('/form/complete', 'GymContentsController@complete')->name('form.complete');
 
