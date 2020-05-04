@@ -132,41 +132,47 @@ class GymContentsController extends Controller
    {
       //バリデーションを実行（結果に問題があれば処理を中断してエラーを返す）
       $request->validate([
+         'gym_id' => 'required',
+         'user_id' => 'required',
          'name' => 'required',
          'zip_code' => 'required',
+         'address'  => 'required',
          'address1'  => 'required',
          'address2'  => 'required',
-         'summary'  => 'required',
-         'detail'  => 'required',
          'lat'  => 'required',
          'lng'  => 'required',
-         'img1'  => 'image',
+         'summary'  => 'required',
+         'detail'  => 'required',
+         'status'  => 'required',
       ]);
-      
-      //アップロードに成功しているか確認　>>>　保存
-      if ($request->file('img1')->isValid([])) {
-         $upload_name = $_FILES['img1']['name'];// アップロードしたファイル名を取得
-         $filename = $request->file('img1')->storeAs('', $upload_name, 'public');
-      }
       
       // 新しいレコードの追加
       #Gymモデルクラスのオブジェクトを作成
-      $gym = new Gym();
+      $gym_content = new Gym_content();
  
       #Gymモデルクラスのプロパティに値を代入
-      $gym->name = $request->input('name');
-      $gym->zip_code = $request->input('zip_code');
-      $gym->address1 = $request->input('address1');
-      $gym->address2 = $request->input('address2');
-      $gym->lat = $request->input('lat');
-      $gym->lng = $request->input('lng');
-      $gym->summary = $request->input('summary');
-      $gym->detail = $request->input('detail');
-      // $gym->created_at = $request->input('created_at');
-      // $gym->updated_at = $request->input('updated_at');
+      $gym_content->gym_id = $request->input('gym_id');
+      $gym_content->user_id = $request->input('user_id');
+      $gym_content->name = $request->input('name');
+      $gym_content->zip_code = $request->input('zip_code');
+      $gym_content->address = $request->input('address');
+      $gym_content->address1 = $request->input('address1');
+      $gym_content->address2 = $request->input('address2');
+      $gym_content->lat = $request->input('lat');
+      $gym_content->lng = $request->input('lng');
+      $gym_content->summary = $request->input('summary');
+      $gym_content->detail = $request->input('detail');
+      $gym_content->status = $request->input('status');
       
       #Gymモデルクラスのsaveメソッドを実行
-      $gym->save();
+      $gym_content->save();
+      
+      // アップロードしたファイル名を取得
+      $upload_name = $_FILES['img1']['name'];
+      //アップロードに成功しているか確認　>>>　保存
+      if ($request->file('img1')->isValid([])) {
+          $filename = $request->file('img1')->storeAs('', $upload_name, 'public');
+      }
       
       //送信完了ページのviewを表示
       return view('gym.complete');

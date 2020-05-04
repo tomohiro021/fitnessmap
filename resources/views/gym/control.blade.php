@@ -9,11 +9,9 @@
       </li>
     </ul>
     <h3>usersTable</h3>
-     <form action="{{ route('gym.users') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
-        <div class="form-group">
-            <input type="text" name="users_id" class="form-control" placeholder="更新データIDを入力">
-            <input type="submit" value="送信">
-        </div>
+    <form method="get" action="{{ route('gym.users') }}">
+        <input type="text" name="id" value="" placeholder="IDを入力（更新）">
+        <input type="submit" value="Search">
     </form>
     <table class="table table-sm">
     <tr>
@@ -36,6 +34,10 @@
     @endforeach
     </table>
     <h3>gymsTable</h3>
+    <form method="get" action="{{ route('gym.gyms') }}">
+        <input type="text" name="id" value="" placeholder="IDを入力（更新）">
+        <input type="submit" value="Search">
+    </form>
     <table class="table table-sm">
     <tr>
         <th>Id</th><th>Gym_Content_Id</th><th>publication_status</th>
@@ -52,6 +54,10 @@
     @endforeach
     </table>
     <h3>gym_contentsTable</h3>
+    <form method="get" action="{{ route('gym.gym_contents') }}">
+        <input type="text" name="id" value="" placeholder="IDを入力（更新）">
+        <input type="submit" value="Search">
+    </form>
     <table class="table table-sm">
     <tr>
         <th>Id</th><th>Gym_id</th><th>User_id</th>

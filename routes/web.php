@@ -40,5 +40,5 @@ Route::get('/info', 'GymContentsController@info')->name('gym.info');
 //店舗入力ページ
 Route::get('/form', 'GymContentsController@form')->name('gym.form');
 //送信完了ページ
-Route::post('/form/complete', 'GymContentsController@complete')->name('form.complete');
+Route::post('/form/complete', 'GymContentsController@complete')->name('gym.complete');
 
