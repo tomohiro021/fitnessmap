@@ -63,7 +63,12 @@
     </div>
     <div class="form-group col-md-10">
       <label for="status">公開/非公開</label>
-      <input id="status" type="text" class="form-control"  name="status" placeholder="店舗名を入力してください" value="{{ old('status') }}">
+      <!--<input id="status" type="text" class="form-control"  name="status" placeholder="店舗名を入力してください" value="{{ old('status') }}">-->
+      {{ Form::select(
+          'status',
+          App\Enums\Status::toSelectArray()
+        )
+      }}
     </div>
     <div class="form-group col-md-6">
       <label for="img1">施設の写真トップ画</label>

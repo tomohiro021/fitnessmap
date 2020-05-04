@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class GymContentsController extends Controller
 {
-    public function control(Request $request)
+    public function control(Request $request)// 管理画面
    {
       //usersTable
       if (isset($request->id))
