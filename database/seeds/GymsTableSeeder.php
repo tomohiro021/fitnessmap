@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class GymsTableSeeder extends Seeder
 {
@@ -13,18 +16,12 @@ class GymsTableSeeder extends Seeder
     {
         \DB::table('gyms')->insert([
             [
-            'id' => 1,
-            'name' => '山田花子',
-            'zip_code' => 1234567,
-            'address1' => '東京都',
-            'address2' => '品川区',
-            'lat' => 2.0,
-            'lng' => 3.0,
-            'summary' => 'テストです',
-            'detail' => 'テストです',
+            'id' => 0,
+            'gym_content_id' => 2,
+            'publication_status' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            ],//
+            ],
         ]);
     }
 }

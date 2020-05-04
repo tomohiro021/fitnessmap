@@ -25,6 +25,14 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 
 // Route::get('/home', 'HomeController@index')->name('home.index');
+//管理ページ
+Route::get('/control', 'GymContentsController@control')->name('gym.control');
+Route::get('/users', 'GymContentsController@users_edit')->name('gym.users');
+Route::post('/users', 'GymContentsController@users_update')->name('gym.users');
+Route::get('/gyms', 'GymContentsController@gyms_edit')->name('gym.gyms');
+Route::post('/gyms', 'GymContentsController@gyms_update')->name('gym.gyms');
+Route::get('/gym_contents', 'GymContentsController@gym_contents_edit')->name('gym.gym_contents');
+Route::post('/gym_contents', 'GymContentsController@gym_contents_update')->name('gym.gym_contents');
 //ホームページ
 Route::get('/home', 'GymContentsController@home')->name('gym.home');
 //店舗紹介ページ
