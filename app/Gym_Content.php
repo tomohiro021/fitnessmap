@@ -22,11 +22,10 @@ class Gym_Content extends Model
      * @var array
      */
     protected $casts = [
-        'Status' => 'int',
+        'status' => 'int',
     ];
     
-    
     protected $enumCasts = [
-        'Status' => Status::class,
+        'status' => Status::class,
     ];
 }

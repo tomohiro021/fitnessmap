@@ -11,6 +11,6 @@ use BenSampo\Enum\Contracts\LocalizedEnum;
  */
 final class Status extends Enum implements LocalizedEnum
 {
-    const Private =   0;
-    const Public =   1;
+    const Private = 0;
+    const Public = 1;
 }

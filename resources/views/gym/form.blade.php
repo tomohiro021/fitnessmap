@@ -66,7 +66,7 @@
       <!--<input id="status" type="text" class="form-control"  name="status" placeholder="店舗名を入力してください" value="{{ old('status') }}">-->
       {{ Form::select(
           'status',
-          App\Enums\Status::toSelectArray()
+          App\Enums\Status::toSelectArray(), '', ['disabled' => 'disabled']
         )
       }}
     </div>
