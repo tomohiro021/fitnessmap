@@ -28,6 +28,8 @@ Route::get('/users/edit', 'GymContentsController@users_edit')->name('gym.users.e
 Route::post('/users/edit', 'GymContentsController@users_update')->name('gym.users.edit');
 Route::get('/users/delete', 'GymContentsController@users_delete')->name('gym.users.delete');
 Route::post('/users/delete', 'GymContentsController@users_remove')->name('gym.users.delete ');
+Route::get('/gyms/create', 'GymContentsController@gyms_create')->name('gym.gyms.create');
+Route::post('/gyms/create', 'GymContentsController@gyms_new')->name('gym.gyms.create');
 Route::get('/gyms/edit', 'GymContentsController@gyms_edit')->name('gym.gyms.edit');
 Route::post('/gyms/edit', 'GymContentsController@gyms_update')->name('gym.gyms.edit');
 Route::get('/gyms/delete', 'GymContentsController@gyms_delete')->name('gym.gyms.delete');

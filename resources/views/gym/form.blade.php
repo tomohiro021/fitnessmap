@@ -31,11 +31,11 @@ html, body {
   	    </div>
   	@endif
     <div class="form-group col-md-10">
-      <label for="gym_id">GymID</label>
+      <label for="gym_id">ジムID</label>
       <input id="gym_id" type="text" class="form-control"  name="gym_id" placeholder="GymIDを入力してください" value="{{ old('gym_id') }}">
     </div>
     <div class="form-group col-md-10">
-      <label for="user_id">UserID</label>
+      <label for="user_id">ユーザーID</label>
       <input id="user_id" type="text" class="form-control"  name="user_id" placeholder="UserIDを入力してください" value="{{ old('user_id') }}">
     </div>
     <div class="form-group col-md-10">
@@ -48,7 +48,8 @@ html, body {
     </div>
     <div class="form-group col-md-10">
       <label for="address">都道府県</label>
-      <input type="text" class="form-control" id="address" name="address" size="40" placeholder="都道府県を入力してください" value="{{ old('address') }}">
+      @component('gym.select')
+      @endcomponent
     </div>
     <div class="form-group col-md-10">
       <label for="address1">区市町村</label>
@@ -76,7 +77,7 @@ html, body {
     </div>
     <div class="form-group col-md-10">
       <label for="status">公開/非公開</label>
-      <!--<input id="status" type="text" class="form-control"  name="status" placeholder="店舗名を入力してください" value="{{ old('status') }}">-->
+      <input id="status" type="hidden" name="status"value="0">
       {{ Form::select(
           'status',
           App\Enums\Status::toSelectArray(), '', ['disabled' => 'disabled']
@@ -114,7 +115,7 @@ html, body {
     api.setZipTextbox('zip_code');
     
     // 住所補完フィールドを追加
-    api.add(new postcodejp.address.StateTextbox('address'));
+    api.add(new postcodejp.address.StateSelectbox('address'));
     api.add(new postcodejp.address.TownTextbox('address1'));
     api.add(new postcodejp.address.StreetTextbox('address2'));
     

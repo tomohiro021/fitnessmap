@@ -9,6 +9,10 @@
         <input type="text" name="id" value="" placeholder="ID ※半角英数"　pattern="^[0-9A-Za-z]+$">
         <input type="submit" value="検索">
     </form>
+    <form method="get" action="{{ route('register') }}">
+        @csrf
+        <input type="submit" value="新規作成">
+    </form>
     <form method="get" action="{{ route('gym.users.edit') }}">
         @csrf
         <input type="text" name="id" value="" placeholder="ID（更新）※半角英数" pattern="^[0-9A-Za-z]+$">
@@ -40,6 +44,10 @@
     @endforeach
     </table>
     <h3>gymsTable</h3>
+    <form method="get" action="{{ route('gym.gyms.create') }}">
+        @csrf
+        <input type="submit" value="新規作成">
+    </form>
     <form method="get" action="{{ route('gym.gyms.edit') }}">
         @csrf
         <input type="text" name="id" value="" placeholder="ID（更新）※半角英数" pattern="^[0-9A-Za-z]+$">
@@ -66,6 +74,10 @@
     @endforeach
     </table>
     <h3>gym_contentsTable</h3>
+    <form method="get" action="{{ route('gym.form') }}">
+        @csrf
+        <input type="submit" value="新規作成">
+    </form>
     <form method="get" action="{{ route('gym.gym_contents.edit') }}">
         @csrf
         <input type="text" name="id" value="" placeholder="ID（更新）※半角英数" pattern="^[0-9A-Za-z]+$">

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class Gym_ContentsTableSeeder extends Seeder
+class GymContentSeeder extends Seeder
 {
     /**
      * Run the database seeds.

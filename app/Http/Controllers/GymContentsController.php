@@ -73,6 +73,21 @@ class GymContentsController extends Controller
       DB::delete('delete from users where id = :id', $param);
       return redirect('/control');
    }
+   public function gyms_create(Request $request)// gymsテーブル新規作成
+   {
+       return view('gym.gyms.create');
+   }
+
+   public function gyms_new(Request $request)
+   {
+       $param = [
+           'id' => $request->id,
+           'gym_content_id' => $request->gym_content_id,
+           'publication_status' => $request->publication_status,
+       ];
+       DB::insert('insert into gyms (id, gym_content_id, publication_status) values (:id, :gym_content_id, :publication_status)', $param);
+       return redirect('/control');
+   }
    public function gyms_edit(Request $request)// gymsテーブル更新
    {
       $param = ['id' => $request->id];
@@ -182,12 +197,12 @@ class GymContentsController extends Controller
          'lng'  => 'required',
          'summary'  => 'required',
          'detail'  => 'required',
-         'status'  => 'required',
+         // 'status'  => 'required',
       ]);
       
       // 新しいレコードの追加
       #Gymモデルクラスのオブジェクトを作成
-      $gym_content = new Gym_content();
+      $gym_content = new GymContent();
  
       #Gymモデルクラスのプロパティに値を代入
       $gym_content->gym_id = $request->input('gym_id');
@@ -209,11 +224,13 @@ class GymContentsController extends Controller
       // アップロードしたファイル名を取得
       $upload_name = $_FILES['img1']['name'];
       //アップロードに成功しているか確認　>>>　保存
-      if ($request->file('img1')->isValid([])) {
-          $filename = $request->file('img1')->storeAs('', $upload_name, 'public');
+      if ($request->file('img1')) {
+         $filename = $request->file('img1')->storeAs('', $upload_name, 'public');
+         return view('gym.complete');
+      }else{
+         //送信完了ページのviewを表示
+         return view('gym.complete');
       }
       
-      //送信完了ページのviewを表示
-      return view('gym.complete');
    }
 }
