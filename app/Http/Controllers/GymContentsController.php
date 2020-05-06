@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gym;
-use App\Gym_Content;
+use App\GymContent;
 use Illuminate\Support\Facades\DB;
 
 class GymContentsController extends Controller
@@ -46,7 +46,7 @@ class GymContentsController extends Controller
    {
       $param = ['id' => $request->id];
       $item = DB::select('select * from users where id = :id', $param);
-      return view('gym.users', ['form' => $item[0]]);
+      return view('gym.users.edit', ['form' => $item[0]]);
    }
    
    public function users_update(Request $request)
@@ -60,11 +60,24 @@ class GymContentsController extends Controller
       DB::update('update users set name =:name, email = :email, gender = :gender where id = :id', $param);
       return redirect('/control');
    }
+   public function users_delete(Request $request)// usersテーブル削除
+   {
+      $param = ['id' => $request->id];
+      $item = DB::select('select * from users where id = :id', $param);
+      return view('gym.users.delete', ['form' => $item[0]]);
+   }
+   
+   public function users_remove(Request $request)
+   {
+      $param = ['id' => $request->id];
+      DB::delete('delete from users where id = :id', $param);
+      return redirect('/control');
+   }
    public function gyms_edit(Request $request)// gymsテーブル更新
    {
       $param = ['id' => $request->id];
       $item = DB::select('select * from gyms where id = :id', $param);
-      return view('gym.gyms', ['form' => $item[0]]);
+      return view('gym.gyms.edit', ['form' => $item[0]]);
    }
    
    public function gyms_update(Request $request)
@@ -80,11 +93,24 @@ class GymContentsController extends Controller
       );
       return redirect('/control');
    }
+   public function gyms_delete(Request $request)// gymsテーブル削除
+   {
+      $param = ['id' => $request->id];
+      $item = DB::select('select * from gyms where id = :id', $param);
+      return view('gym.gyms.delete', ['form' => $item[0]]);
+   }
+   
+   public function gyms_remove(Request $request)
+   {
+      $param = ['id' => $request->id];
+      DB::delete('delete from gyms where id = :id', $param);
+      return redirect('/control');
+   }
    public function gym_contents_edit(Request $request)// gym_contentsテーブル更新
    {
       $param = ['id' => $request->id];
       $item = DB::select('select * from gym_contents where id = :id', $param);
-      return view('gym.gym_contents', ['form' => $item[0]]);
+      return view('gym.gym_contents.edit', ['form' => $item[0]]);
    }
    
    public function gym_contents_update(Request $request)
@@ -110,6 +136,19 @@ class GymContentsController extends Controller
          lat = :lat, lng = :lng, summary = :summary, detail = :detail, status = :status 
          where id = :id', $param
       );
+      return redirect('/control');
+   }
+   public function gym_contents_delete(Request $request)// gym_contentsテーブル削除
+   {
+      $param = ['id' => $request->id];
+      $item = DB::select('select * from gym_contents where id = :id', $param);
+      return view('gym.gym_contents.delete', ['form' => $item[0]]);
+   }
+   
+   public function gym_contents_remove(Request $request)
+   {
+      $param = ['id' => $request->id];
+      DB::delete('delete from gym_contents where id = :id', $param);
       return redirect('/control');
    }
     public function home(Request $request)

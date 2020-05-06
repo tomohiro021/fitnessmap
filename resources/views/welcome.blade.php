@@ -94,15 +94,6 @@
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
-                
-                <form action="{{ route('/') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
-
-                <input type="file" class="form-control-file" id="img1" name="img1" size="40" accept="image/*" ><!--multiple-->
-<div class="form-group">
-    <div class="text-center">
-      <input type="submit" name="button1" value="送信" class="btn btn-primary flex-fill flex-md-grow-0" formmethod="POST">
-    </div>
-  </div>
             </div>
         </div>
     </body>

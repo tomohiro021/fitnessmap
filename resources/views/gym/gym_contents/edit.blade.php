@@ -2,14 +2,9 @@
 
 @section('content')
 <div class="container">
-    <h1>管理者画面</h1>
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('gym.control') }}">管理画面トップ</a>
-      </li>
-    </ul>
-    <h3>usersTable更新</h3>
-    <form action="/gym_contents" method="post">
+    <h2><a href="{{ route('gym.control') }}">管理者ページ</a></h2>
+    <h3>gym_contentsTable更新ページ</h3>
+    <form action="/gym_contents/edit" method="post">
      <table>
         @csrf
         <input type="hidden" name="id" value="{{$form->id}}">
@@ -51,11 +46,13 @@
         </tr>
         <tr>
           <th>summary: </th>
-          <td><input type="text" name="summary" value="{{$form->summary}}"></td>
+          <td><textarea id="summary" name="summary" rows="8" cols="80" class="form-control" >{{$form->summary}}</textarea></td>
+          <!--<input type="text" name="summary" value="{{$form->summary}}">-->
         </tr>
         <tr>
           <th>detail: </th>
-          <td><input type="text" name="detail" value="{{$form->detail}}"></td>
+          <td><textarea id="detail" name="detail" rows="8" cols="80" class="form-control" >{{$form->detail}}</textarea></td>
+          <!--<input type="text" name="detail" value="{{$form->detail}}">-->
         </tr>
         <tr>
           <th>status: </th>

@@ -2,16 +2,22 @@
 
 @section('content')
 <div class="container">
-    <h1>管理者画面</h1>
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('gym.control') }}">管理画面トップ</a>
-      </li>
-    </ul>
+    <h2><a href="{{ route('gym.control') }}">管理者ページ</a></h2>
     <h3>usersTable</h3>
-    <form method="get" action="{{ route('gym.users') }}">
-        <input type="text" name="id" value="" placeholder="IDを入力（更新）">
-        <input type="submit" value="Search">
+    <form method="get" action="{{ route('gym.control') }}">
+        @csrf
+        <input type="text" name="id" value="" placeholder="ID ※半角英数"　pattern="^[0-9A-Za-z]+$">
+        <input type="submit" value="検索">
+    </form>
+    <form method="get" action="{{ route('gym.users.edit') }}">
+        @csrf
+        <input type="text" name="id" value="" placeholder="ID（更新）※半角英数" pattern="^[0-9A-Za-z]+$">
+        <input type="submit" value="更新">
+    </form>
+    <form method="get" action="{{ route('gym.users.delete') }}">
+        @csrf
+        <input type="text" name="id" value="" placeholder="ID（削除）※半角英数" pattern="^[0-9A-Za-z]+$">
+        <input type="submit" value="削除">
     </form>
     <table class="table table-sm">
     <tr>
@@ -34,9 +40,15 @@
     @endforeach
     </table>
     <h3>gymsTable</h3>
-    <form method="get" action="{{ route('gym.gyms') }}">
-        <input type="text" name="id" value="" placeholder="IDを入力（更新）">
-        <input type="submit" value="Search">
+    <form method="get" action="{{ route('gym.gyms.edit') }}">
+        @csrf
+        <input type="text" name="id" value="" placeholder="ID（更新）※半角英数" pattern="^[0-9A-Za-z]+$">
+        <input type="submit" value="更新">
+    </form>
+    <form method="get" action="{{ route('gym.gyms.delete') }}">
+        @csrf
+        <input type="text" name="id" value="" placeholder="ID（削除）※半角英数" pattern="^[0-9A-Za-z]+$">
+        <input type="submit" value="削除">
     </form>
     <table class="table table-sm">
     <tr>
@@ -54,18 +66,24 @@
     @endforeach
     </table>
     <h3>gym_contentsTable</h3>
-    <form method="get" action="{{ route('gym.gym_contents') }}">
-        <input type="text" name="id" value="" placeholder="IDを入力（更新）">
-        <input type="submit" value="Search">
+    <form method="get" action="{{ route('gym.gym_contents.edit') }}">
+        @csrf
+        <input type="text" name="id" value="" placeholder="ID（更新）※半角英数" pattern="^[0-9A-Za-z]+$">
+        <input type="submit" value="更新">
+    </form>
+    <form method="get" action="{{ route('gym.gym_contents.delete') }}">
+        @csrf
+        <input type="text" name="id" value="" placeholder="ID（削除）※半角英数" pattern="^[0-9A-Za-z]+$">
+        <input type="submit" value="削除">
     </form>
     <table class="table table-sm">
-    <tr>
-        <th>Id</th><th>Gym_id</th><th>User_id</th>
-        <th>Name</th><th>Zip_code</th><th>address</th>
-        <th>address1</th><th>address2</th><th>lat</th>
-        <th>lng</th><th>summary</th><th>detail</th>
-        <th>status</th><th>Created_at</th><th>Updated_at</th>
-    </tr>
+        <tr>
+            <th>Id</th><th>Gym_id</th><th>User_id</th>
+            <th>Name</th><th>Zip_code</th><th>address</th>
+            <th>address1</th><th>address2</th><th>lat</th>
+            <th>lng</th><th>summary</th><th>detail</th>
+            <th>status</th><th>Created_at</th><th>Updated_at</th>
+        </tr>
     @foreach ($items2 as $item2)
         <tr>
             <td>{{$item2->id}}</td>

@@ -2,14 +2,9 @@
 
 @section('content')
 <div class="container">
-    <h1>管理者画面</h1>
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('gym.control') }}">管理画面トップ</a>
-      </li>
-    </ul>
-    <h3>usersTable更新</h3>
-    <form action="/gyms" method="post">
+    <h2><a href="{{ route('gym.control') }}">管理者ページ</a></h2>
+    <h3>gymsTable更新ページ</h3>
+    <form action="/gyms/edit" method="post">
      <table>
         @csrf
         <input type="hidden" name="id" value="{{$form->id}}">

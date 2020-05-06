@@ -1,30 +1,54 @@
-<header>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light rounded-bottom">
     <a class="navbar-brand" href="{{ route('gym.home') }}">FitnessMap</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切替">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="Navbar">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="{{ route('gym.home') }}">ホーム <span class="sr-only">(現位置)</span></a>
+         <a class="nav-link" href="{{ route('gym.home') }}">ホーム</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('gym.info') }}">店舗紹介</a>
+         <a class="nav-link" href="{{ route('gym.info') }}">店舗紹介</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('gym.form') }}">店舗登録</a>
+         <a class="nav-link" href="{{ route('gym.form') }}">店舗登録</a>
         </li>
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ドロップダウン</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">リンク1</a>
-            <a class="dropdown-item" href="#">リンク2</a>
-            <a class="dropdown-item" href="#">リンク3</a>
-          </div>
+        <li class="nav-item">
+         <a class="nav-link" href="{{ route('gym.control') }}">管理画面</a>
         </li>
+      </ul>
+      <ul class="navbar-nav">
+        @guest
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+            @if (Route::has('register'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                </li>
+            @endif
+        @else
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </li>
+        @endguest
       </ul>
     </div>
   </nav>
-</header>
-  
+</div>
