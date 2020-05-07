@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
     <h2><a href="{{ route('gym.control') }}">管理者ページ</a></h2>
-    <h3>usersTable</h3>
+    <h3 class="text-secondary">テーブル一覧</h3>
+    <h4 class="">Users</h4>
     <form method="get" action="{{ route('gym.control') }}">
         @csrf
         <input type="text" name="id" value="" placeholder="ID ※半角英数"　pattern="^[0-9A-Za-z]+$">
@@ -43,7 +44,7 @@
         </tr>
     @endforeach
     </table>
-    <h3>gymsTable</h3>
+    <h4>Gyms</h4>
     <form method="get" action="{{ route('gym.gyms.create') }}">
         @csrf
         <input type="submit" value="新規作成">
@@ -73,7 +74,7 @@
         </tr>
     @endforeach
     </table>
-    <h3>gym_contentsTable</h3>
+    <h4>Gym_contents</h4>
     <form method="get" action="{{ route('gym.form') }}">
         @csrf
         <input type="submit" value="新規作成">

@@ -171,7 +171,7 @@ class GymContentsController extends Controller
       //ホームページのviewを表示
       return view('gym.home');
    }
-    public function info(Request $request)
+    public function info(Request $request)#--------------------------------------------------
    {
       $gym_contents = DB::table('gym_contents')->where('user_id', 2)->get();
       

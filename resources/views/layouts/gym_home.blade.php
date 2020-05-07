@@ -22,7 +22,7 @@
 </head>
 <body>
     <header>
-    @component('gym.header')
+    @component('gym.components.header')
     @endcomponent
     @yield('header')
     </header>
@@ -31,7 +31,7 @@
     @yield('content')
     </main>
     
-    @component('gym.footer')
+    @component('gym.components.footer')
     @endcomponent
     
     @yield('script')
