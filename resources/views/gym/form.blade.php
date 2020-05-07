@@ -16,7 +16,7 @@ html, body {
 @section('content')
 <div class="container">
   <div class="text-center">
-    <h2>店舗登録画面</h2>
+    <h2>新規投稿</h2>
     <p><strong>入力画面</strong> -> 確認画面 -> 完了画面</p>
   </div>
   <form action="{{ route('gym.complete') }}" method="post" class="form-horizontal" enctype="multipart/form-data">

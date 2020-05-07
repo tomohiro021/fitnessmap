@@ -173,8 +173,10 @@ class GymContentsController extends Controller
    }
     public function info(Request $request)
    {
+      $gym_contents = DB::table('gym_contents')->where('user_id', 2)->get();
+      
       //施設紹介ページのviewを表示
-      return view('gym.info');
+      return view('gym.info')->with(['gym_contents' => $gym_contents]);
    }
     public function form(Request $request)
    {

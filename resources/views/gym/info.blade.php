@@ -1,21 +1,22 @@
 @extends('layouts.gym_home')
 
 @section('header')
+@foreach($gym_contents as $gym_content)
 <div class="container">
     <div class="row">
         <div class="col-md-4  img-hidden">
             <a href="/images/stretching.jpg" data-lightbox="group"><img src="/images/stretching.jpg"  class="img-thumbnail float-right" width="400" height="400" alt=""></a>
         </div>
         <div class="col-md-8">
-            <h2>ジムのタイトル</h2>
-            <h5>住所</h5>
-            <p>住所の入力住所の入力</p>
-            <h5>アクセス</h5>
+            <h2>{{ $gym_content->name }}</h2>
+            <h6 class="font-weight-bold text-secondary">住所</h6>
+            <p>〒{{ $gym_content->zip_code }}<br>{{ $gym_content->address }}{{ $gym_content->address1 }}{{ $gym_content->address2 }}</p>
+            <h6 class="font-weight-bold text-secondary">アクセス</h6>
             <p>アクセス方法アクセス方法</p>
-            <h5>カテゴリ</h5>
+            <h6 class="font-weight-bold text-secondary">カテゴリ</h6>
             <p>
-                タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力<br>
-                タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力
+                タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力<br>
+                タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力
             </p>
         </div>
     </div>
@@ -27,13 +28,7 @@
     <div class="row">
         <div class="col-md-12">
             <p>
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
+                {{ $gym_content->summary }}
             </p>
         </div>
     </div>
@@ -41,15 +36,17 @@
     <div class="row">
         <div class="col-md-12">
             <p>
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
-                紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります紹介文が入ります
+                {{ $gym_content->detail }}
             </p>
         </div>
     </div>
 </div>
+<div class ="container">
+    <div id="BbsScript"><a href="//bp.stsd.info/">掲示板ブログパーツ</a></div>
+</div>
+@endforeach
+@endsection
+
+@section('script')
+<script type="text/javascript" src="//bp.stsd.info/bbs/bbs.js" charset="utf-8" async></script>
 @endsection

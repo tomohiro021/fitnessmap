@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+// Route::get('/', 'HomeController@index');
 
 // Route::get('/home', 'HomeController@index')->name('home.index');
 //管理ページ
@@ -42,8 +42,8 @@ Route::post('/gym_contents/delete', 'GymContentsController@gym_contents_remove')
 Route::get('/home', 'GymContentsController@home')->name('gym.home');
 //店舗紹介ページ
 Route::get('/info', 'GymContentsController@info')->name('gym.info');
-//店舗入力ページ
-Route::get('/form', 'GymContentsController@form')->name('gym.form');
+//新規投稿ページ
+Route::get('/form', 'GymContentsController@form')->name('gym.form')
+    ->middleware('auth');
 //送信完了ページ
 Route::post('/form/complete', 'GymContentsController@complete')->name('gym.complete');
-
