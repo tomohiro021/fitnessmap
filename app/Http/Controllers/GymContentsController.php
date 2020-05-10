@@ -6,73 +6,10 @@ use Illuminate\Http\Request;
 use App\Gym;
 use App\GymContent;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GymContentsController extends Controller
 {
-    public function control(Request $request)// 管理画面
-   {
-      //usersTable
-      if (isset($request->id))
-      {
-      $param = ['id' => $request->id];
-      $items = DB::select('select * from users where id = :id',
-         $param);
-      } else {
-         $items = DB::select('select * from users');
-      }
-      //gymsTable
-      if (isset($request->id))
-      {
-      $param1 = ['id' => $request->id];
-      $items1 = DB::select('select * from gyms where id = :id',
-         $param1);
-      } else {
-         $items1 = DB::select('select * from gyms');
-      }
-      //gym_contentsTable
-      if (isset($request->id))
-      {
-      $param2 = ['id' => $request->id];
-      $items2 = DB::select('select * from gym_contents where id = :id',
-         $param2);
-      } else {
-         $items2 = DB::select('select * from gym_contents');
-      }
-      return view('gym.control', [
-         'items' => $items, 'items1' => $items1, 'items2' => $items2
-      ]);
-   }
-   public function users_edit(Request $request)// usesテーブル更新
-   {
-      $param = ['id' => $request->id];
-      $item = DB::select('select * from users where id = :id', $param);
-      return view('gym.users.edit', ['form' => $item[0]]);
-   }
-   
-   public function users_update(Request $request)
-   {
-      $param = [
-          'id' => $request->id,
-          'name' => $request->name,
-          'email' => $request->email,
-          'gender' => $request->gender,
-      ];
-      DB::update('update users set name =:name, email = :email, gender = :gender where id = :id', $param);
-      return redirect('/control');
-   }
-   public function users_delete(Request $request)// usersテーブル削除
-   {
-      $param = ['id' => $request->id];
-      $item = DB::select('select * from users where id = :id', $param);
-      return view('gym.users.delete', ['form' => $item[0]]);
-   }
-   
-   public function users_remove(Request $request)
-   {
-      $param = ['id' => $request->id];
-      DB::delete('delete from users where id = :id', $param);
-      return redirect('/control');
-   }
    public function gyms_create(Request $request)// gymsテーブル新規作成
    {
        return view('gym.gyms.create');
@@ -173,8 +110,10 @@ class GymContentsController extends Controller
    }
     public function info(Request $request)#--------------------------------------------------
    {
-      $gym_contents = DB::table('gym_contents')->where('user_id', 2)->get();
-      
+      $user_id = Auth::id();
+      $gym_contents = DB::table('gym_contents')->where('user_id', $user_id)->get();
+      // $param = ['id' => $request->id];
+      // $gym_contents = DB::select('select * from gym_contents where id = :id', $param);
       //施設紹介ページのviewを表示
       return view('gym.info')->with(['gym_contents' => $gym_contents]);
    }
@@ -233,6 +172,5 @@ class GymContentsController extends Controller
          //送信完了ページのviewを表示
          return view('gym.complete');
       }
-      
    }
 }

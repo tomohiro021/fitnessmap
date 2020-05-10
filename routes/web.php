@@ -33,28 +33,17 @@ Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
 
 Auth::routes();
 
+Route::resource('users', 'UserController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
+Route::resource('gyms', 'GymController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
+Route::resource('gym_contents', 'GymContentController');
+
 // システム管理者のみ
 Route::group(['middleware' => ['auth', 'can:system-only']], function () {
-//管理者ページ
-Route::get('/control', 'GymContentsController@control')->name('gym.control');
-//User：編集・削除
-Route::get('/users/edit', 'GymContentsController@users_edit')->name('gym.users.edit');
-Route::post('/users/edit', 'GymContentsController@users_update')->name('gym.users.edit');
-Route::get('/users/delete', 'GymContentsController@users_delete')->name('gym.users.delete');
-Route::post('/users/delete', 'GymContentsController@users_remove')->name('gym.users.delete ');
-//Gyms：登録・編集・削除
-Route::get('/gyms/create', 'GymContentsController@gyms_create')->name('gym.gyms.create');
-Route::post('/gyms/create', 'GymContentsController@gyms_new')->name('gym.gyms.create');
-Route::get('/gyms/edit', 'GymContentsController@gyms_edit')->name('gym.gyms.edit');
-Route::post('/gyms/edit', 'GymContentsController@gyms_update')->name('gym.gyms.edit');
-Route::get('/gyms/delete', 'GymContentsController@gyms_delete')->name('gym.gyms.delete');
-Route::post('/gyms/delete', 'GymContentsController@gyms_remove')->name('gym.gyms.delete');
-//GymContents：編集・削除
-Route::get('/gym_contents/edit', 'GymContentsController@gym_contents_edit')->name('gym.gym_contents.edit');
-Route::post('/gym_contents/edit', 'GymContentsController@gym_contents_update')->name('gym.gym_contents.edit');
-Route::get('/gym_contents/delete', 'GymContentsController@gym_contents_delete')->name('gym.gym_contents.delete');
-Route::post('/gym_contents/delete', 'GymContentsController@gym_contents_remove')->name('gym.gym_contents.delete');
 });
+//管理者ページ
+//User：編集・削除
+//Gyms：登録・編集・削除
+//GymContents：編集・削除
 
 //ホームページ
 Route::get('/home', 'GymContentsController@home')->name('gym.home');
@@ -65,4 +54,3 @@ Route::get('/form', 'GymContentsController@form')->name('gym.form')
     ->middleware('auth');
 //送信完了ページ
 Route::post('/form/complete', 'GymContentsController@complete')->name('gym.complete');
-

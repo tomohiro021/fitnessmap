@@ -1,15 +1,10 @@
 @extends('layouts.gym_home')
 
-@section('head')
-@endsection
-
 @section('content')
 <div class="container">
-  <div class="text-center">
-    <h2>新規投稿</h2>
-    <p><strong>入力画面</strong> -> 確認画面 -> 完了画面</p>
-  </div>
-  <form action="{{ route('gym.complete') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
+<h2><a href="{{ route('gym_contents.index') }}">管理者ページ</a></h2>
+    <h3>GymContents新規作成ページ</h3>
+    <form action="{{ route('gym_contents.store') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
     @csrf
     @if ($errors->any())
   	    <div class="alert alert-danger">

@@ -1,7 +1,7 @@
 @extends('layouts.gym_home')
 
-@section('header')
 @foreach($gym_contents as $gym_content)
+@section('header')
 <div class="container">
     <div class="row">
         <div class="col-md-4  img-hidden">
@@ -10,9 +10,12 @@
         <div class="col-md-8">
             <h2>{{ $gym_content->name }}</h2>
             <h6 class="font-weight-bold text-secondary">住所</h6>
-            <p>〒{{ $gym_content->zip_code }}<br>{{ $gym_content->address }}{{ $gym_content->address1 }}{{ $gym_content->address2 }}</p>
-            <h6 class="font-weight-bold text-secondary">アクセス</h6>
-            <p>アクセス方法アクセス方法</p>
+            <p>
+                〒{{ $gym_content->zip_code }}<br>
+                @include('gym.pref_convert')
+                {{ $gym_content->address1 }}
+                {{ $gym_content->address2 }}
+            </p>
             <h6 class="font-weight-bold text-secondary">カテゴリ</h6>
             <p>
                 タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力<br>
@@ -41,12 +44,5 @@
         </div>
     </div>
 </div>
-<div class ="container">
-    <div id="BbsScript"><a href="//bp.stsd.info/">掲示板ブログパーツ</a></div>
-</div>
+@endsection
 @endforeach
-@endsection
-
-@section('script')
-<script type="text/javascript" src="//bp.stsd.info/bbs/bbs.js" charset="utf-8" async></script>
-@endsection
