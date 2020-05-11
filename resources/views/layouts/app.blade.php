@@ -42,9 +42,6 @@
                         <li class="nav-item">
                           <a class="nav-link" href="{{ route('gym.form') }}">店舗登録</a>
                         </li>
-                        <li class="nav-item">
-                         <a class="nav-link" href="{{ route('gym.control') }}">管理画面</a>
-                        </li>
                         <li class="nav-item dropdown">
                           <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ドロップダウン</a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -57,6 +54,11 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @can('system-only') {{-- システム管理者権限のみに表示される --}}
+                            <li class="nav-item">
+                             <a class="nav-link" href="{{ route('gym.control') }}">管理者</a>
+                            </li>
+                        @endcan
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

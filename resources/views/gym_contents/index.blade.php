@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h2><a href="#">管理者ページ</a></h2>
-    <h4>Gym_contents</h4>
+    <h3><a href="#">管理者ページ</a></h3>
+    <h4 class="text-secondary">Gym_contents</h4>
     <a href = "{{ route('gym_contents.create') }}">新規作成</a>
     <table class="table table-sm">
         @foreach ($gym_contents as $gym_content)
@@ -20,14 +20,14 @@
             <td>{{$gym_content->user_id}}</td>
             <td><a href = "{{ route('gym_contents.show', $gym_content->id) }}">{{$gym_content->name}}</a></td>
             <td>{{$gym_content->zip_code}}</td>
-            <td>{{$gym_content->address}}</td>
+            <td>{{$gym_content->address->description}}</td>
             <td>{{$gym_content->address1}}</td>
             <td>{{$gym_content->address2}}</td>
             <td>{{$gym_content->lat}}</td>
             <td>{{$gym_content->lng}}</td>
             <td>{{$gym_content->summary}}</td>
             <td>{{$gym_content->detail}}</td>
-            <td>{{$gym_content->status}}</td>
+            <td>{{$gym_content->status->description}}</td>
         </tr>
         @endforeach
     </table>

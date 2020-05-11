@@ -2,67 +2,89 @@
 
 @section('content')
 <div class="container">
-<h2><a href="{{ route('gym_contents.index') }}">管理者ページ</a></h2>
-    <h3>GymContents更新ページ</h3>
-    <table class="table table-sm">
-      <form action="/gym_contents/{{ $gym_content->id }}" method="post">
-        @method('PUT')
-        @csrf
-        <tr>
-          <th>gym_id: </th>
-          <td><input type="text" name="gym_id" value="{{$gym_content->gym_id}}"></td>
-        </tr>
-        <tr>
-          <th>user_id: </th>
-          <td><input type="text" name="user_id" value="{{$gym_content->user_id}}"></td>
-        </tr>
-        <tr>
-          <th>name: </th>
-          <td><input type="text" name="name" value="{{$gym_content->name}}"></td>
-        </tr>
-        <tr>
-          <th>zip_code: </th>
-          <td><input type="text" name="zip_code" value="{{$gym_content->zip_code}}"></td>
-        </tr>
-        <tr>
-          <th>address: </th>
-          <td><input type="text" name="address" value="{{$gym_content->address}}"></td>
-        </tr>
-        <tr>
-          <th>address1: </th>
-          <td><input type="text" name="address1" value="{{$gym_content->address1}}"></td>
-        </tr>
-        <tr>
-          <th>address2: </th>
-          <td><input type="text" name="address2" value="{{$gym_content->address2}}"></td>
-        </tr>
-        <tr>
-          <th>lat: </th>
-          <td><input type="text" name="lat" value="{{$gym_content->lat}}"></td>
-        </tr>
-        <tr>
-          <th>lng: </th>
-          <td><input type="text" name="lng" value="{{$gym_content->lng}}"></td>
-        </tr>
-        <tr>
-          <th>summary: </th>
-          <td><input type="text" name="summary" value="{{$gym_content->summary}}"></td>
-        </tr>
-        <tr>
-          <th>detail: </th>
-          <td><input type="text" name="detail" value="{{$gym_content->detail}}"></td>
-        </tr>
-        <tr>
-          <th>status: </th>
-          <td><input type="text" name="status" value="{{$gym_content->status}}"></td>
-        </tr>
-        <tr><th></th><td><input type="submit" value="更新"></td></tr>
-      </form>
-      <form action="/gym_contents/{{ $gym_content->id }}" method="post">
-        @method('DELETE')
-        @csrf
-        <tr><th></th><td><input type="submit" value="削除"></td></tr>
-      </form>
-    </table>
+  <h3><a href="{{ route('gym_contents.index') }}">管理者ページ</a></h3>
+  <h4 class="text-secondary">GymContents更新ページ</h4>
+  <form action="/gym_contents/{{ $gym_content->id }}" method="post">
+    @method('PUT')
+    @csrf
+    <div class="form-group col-md-10">
+      <label for="gym_id">ジムID</label>
+      <input id="gym_id" type="text" class="form-control"  name="gym_id" placeholder="GymIDを入力してください" value="{{$gym_content->gym_id}}">
+    </div>
+    <div class="form-group col-md-10">
+      <label for="user_id">ユーザーID</label>
+      <input id="user_id" type="text" class="form-control"  name="user_id" placeholder="UserIDを入力してください" value="{{$gym_content->user_id}}">
+    </div>
+    <div class="form-group col-md-10">
+      <label for="name">店舗名</label>
+      <input id="name" type="text" class="form-control"  name="name" placeholder="店舗名を入力してください" value="{{$gym_content->name}}">
+    </div>
+    <div class="form-group col-md-10">
+      <label for="zip_code">郵便番号（ハイフンなし）</label>
+      <input type="text" class="form-control" id="zip_code" name="zip_code" size="40" placeholder="1234567" value="{{$gym_content->zip_code}}">
+    </div>
+    <div class="form-group col-md-10">
+      <label for="address">都道府県</label>
+      {{ Form::select(
+          'address',
+          [null=>'都道府県']+App\Enums\Address::toSelectArray(),
+          $gym_content->address,
+          ['class'=>'form-control', 'id'=>'address']
+        )
+      }}
+    </div>
+    <div class="form-group col-md-10">
+      <label for="address1">区市町村</label>
+      <input type="text" class="form-control" id="address1" name="address1" size="40" placeholder="区市町村を入力してください" value="{{$gym_content->address1}}">
+    </div>
+    <div class="form-group col-md-10">
+      <label for="address2">以降の住所</label>
+      <input type="text" class="form-control" id="address2" name="address2" size="40" placeholder="以降を入力してください" value="{{$gym_content->address2}}">
+    </div>
+    <div class="form-group col-md-10">
+      <label for="lat">緯度</label>
+      <input id="lat" type="text" class="form-control"  name="lat" placeholder="" value="{{$gym_content->lat}}">
+    </div>
+    <div class="form-group col-md-10">
+      <label for="lng">経度</label>
+      <input id="lng" type="text" class="form-control"  name="lng" placeholder="" value="{{$gym_content->lng}}">
+    </div>
+    <div class="form-group col-md-10">
+      <label for="summary">説明文</label>
+      <textarea id="summary" name="summary" rows="8" cols="80" class="form-control" >{{$gym_content->summary}}</textarea>
+    </div>
+    <div class="form-group col-md-10">
+      <label for="detail">詳細説明</label>
+      <textarea id="detail" name="detail" rows="8" cols="80" class="form-control" >{{$gym_content->detail}}</textarea>
+    </div>
+    <div class="form-group col-md-10">
+      <label for="status">公開/非公開</label>
+      {{ Form::select(
+          'status',
+          App\Enums\Status::toSelectArray(),
+          $gym_content->status,
+          ['class'=>'form-control', 'id'=>'status']
+        )
+      }}
+    </div>
+    <div class="form-group col-md-6">
+      <label for="img1">施設の写真トップ</label>
+      <input type="file" class="form-control-file" id="img1" name="img1" size="40" accept="image/*" >
+    </div>
+    <div class="form-group col-md-10">
+        <div class="text-center">
+          <input type="submit" value="更新" class="btn btn-primary btn-block flex-fill flex-md-grow-0">
+        </div>
+    </div>
+  </form>
+  <form action="/gym_contents/{{ $gym_content->id }}" method="post">
+    @method('DELETE')
+    @csrf
+    <div class="form-group col-md-10">
+        <div class="text-center">
+          <input type="submit" value="削除" class="btn btn-danger btn-block flex-fill flex-md-grow-0">
+        </div>
+    </div>
+  </form>
 </div>
 @endsection

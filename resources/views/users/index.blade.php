@@ -2,10 +2,11 @@
 
 @section('content')
 <div class="container">
-    <h3 class="text-secondary">Users</h3>
+    <h3><a href="#">管理者ページ</a></h3>
+    <h4 class="text-secondary">Users</h4>
     <table class="table table-sm">
         <tr>
-            <th>Id</th><th>Name</th><th>Email</th><th>Gender</th>
+            <th>id</th><th>name</th><th>email</th><th>role</th><th>gender</th>
         </tr>
         @foreach ($users as $user)
         <tr>

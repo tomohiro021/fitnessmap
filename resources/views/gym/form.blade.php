@@ -7,7 +7,6 @@
 <div class="container">
   <div class="text-center">
     <h2>新規投稿</h2>
-    <p><strong>入力画面</strong> -> 確認画面 -> 完了画面</p>
   </div>
   <form action="{{ route('gym.complete') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
     @csrf
@@ -22,11 +21,11 @@
   	@endif
     <div class="form-group col-md-10">
       <label for="gym_id">ジムID</label>
-      <input id="gym_id" type="text" class="form-control"  name="gym_id" placeholder="GymIDを入力してください" value="{{ old('gym_id') }}">
+      <input id="gym_id" type="text" class="form-control"  name="gym_id" placeholder="" value="{{ old('gym_id') }}">
     </div>
     <div class="form-group col-md-10">
       <label for="user_id">ユーザーID</label>
-      <input id="user_id" type="text" class="form-control"  name="user_id" placeholder="UserIDを入力してください" value="{{ old('user_id') }}">
+      <input id="user_id" type="text" class="form-control"  name="user_id" placeholder="" value="{{ old('user_id') }}">
     </div>
     <div class="form-group col-md-10">
       <label for="name">店舗名</label>
@@ -38,8 +37,13 @@
     </div>
     <div class="form-group col-md-10">
       <label for="address">都道府県</label>
-      @component('gym.select')
-      @endcomponent
+      {{ Form::select(
+          'address',
+          [null=>'都道府県']+App\Enums\Address::toSelectArray(),
+          old('address'),
+          ['class'=>'form-control', 'id'=>'address']
+        )
+      }}
     </div>
     <div class="form-group col-md-10">
       <label for="address1">区市町村</label>
@@ -79,9 +83,9 @@
       <label for="img1">施設の写真トップ</label>
       <input type="file" class="form-control-file" id="img1" name="img1" size="40" accept="image/*" >
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-10">
       <div class="text-center">
-        <input type="submit" name="button1" value="新規作成" class="btn btn-primary flex-fill flex-md-grow-0" formmethod="POST">
+        <input type="submit" name="button1" value="新規作成" class="btn btn-primary btn-block flex-fill flex-md-grow-0" formmethod="POST">
       </div>
     </div>
   </form>

@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    <h2><a href="#">管理者ページ</a></h2>
-    <h4>Gyms</h4>
+    <h3><a href="#">管理者ページ</a></h3>
+    <h4 class="text-secondary">Gyms</h4>
     <table class="table table-sm">
         <tr>
-            <th>Id</th><th>Gym_Content_Id</th><th>publication_status</th>
+            <th>id</th><th>gym_content_id</th><th>publication_status</th>
         </tr>
         @foreach ($gyms as $gym)
             <tr>

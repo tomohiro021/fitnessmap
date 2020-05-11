@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h2><a href="{{ route('gym_contents.index') }}">管理者ページ</a></h2>
-    <h3>GymContents詳細ページ</h3>
+    <h3><a href="{{ route('gym_contents.index') }}">管理者ページ</a></h3>
+    <h4 class="text-secondary">GymContents詳細ページ</h3>
     <table class="table table-sm">
       <tr>
         <th>id: </th>
@@ -27,7 +27,7 @@
       </tr>
       <tr>
         <th>address: </th>
-        <td>{{$gym_content->address}}</td>
+        <td>{{$gym_content->address->description}}</td>
       </tr>
       <tr>
         <th>address1: </th>
@@ -55,7 +55,7 @@
       </tr>
       <tr>
         <th>status: </th>
-        <td>{{$gym_content->status}}</td>
+        <td>{{$gym_content->status->description}}</td>
       </tr>
       <tr>
         <th></th>

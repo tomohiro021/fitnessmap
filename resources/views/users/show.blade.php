@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h2><a href="{{ route('users.index') }}">管理者ページ</a></h2>
-    <h3>Users詳細ページ</h3>
+    <h3><a href="{{ route('users.index') }}">管理者ページ</a></h3>
+    <h4 class="text-secondary">Users詳細ページ</h4>
     <table class="table table-sm">
       <tr>
         <th>name: </th>

@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use BenSampo\Enum\Traits\CastsEnums;
 use App\Enums\Status;
+use App\Enums\Address;
 
 class GymContent extends Model
 {
-    use Notifiable;
     use CastsEnums;
     
     /**
@@ -18,7 +18,7 @@ class GymContent extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'gym_id', 'user_id', 'name', 'zip_code', 'address', 'address1',
+        'gym_id', 'user_id', 'name', 'zip_code', 'address', 'address1',
         'address2', 'lat', 'lng','summary', 'detail', 'status',
     ];
     
@@ -29,9 +29,11 @@ class GymContent extends Model
      */
     protected $casts = [
         'status' => 'int',
+        'address' => 'int',
     ];
     
     protected $enumCasts = [
         'status' => Status::class,
+        'address' => Address::class,
     ];
 }

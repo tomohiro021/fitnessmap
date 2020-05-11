@@ -31,19 +31,21 @@ Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
     //
 });
 
-Auth::routes();
-
-Route::resource('users', 'UserController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
-Route::resource('gyms', 'GymController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
-Route::resource('gym_contents', 'GymContentController');
-
 // システム管理者のみ
 Route::group(['middleware' => ['auth', 'can:system-only']], function () {
 });
+
+Auth::routes();
+
 //管理者ページ
-//User：編集・削除
-//Gyms：登録・編集・削除
-//GymContents：編集・削除
+Route::get('/control', 'GymContentsController@control')->name('gym.control');
+//User：一覧・編集・削除
+Route::resource('users', 'UserController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
+//Gyms：一覧・編集・削除
+Route::resource('gyms', 'GymController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
+//GymContents：一覧・登録・編集・削除
+Route::resource('gym_contents', 'GymContentController');
+
 
 //ホームページ
 Route::get('/home', 'GymContentsController@home')->name('gym.home');

@@ -15,13 +15,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('gym.form') }}">店舗新規登録</a>
                 </li>
-                @can('system-only') {{-- システム管理者権限のみに表示される --}}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('gym.control') }}">管理者ページ</a>
-                </li>
-                @endcan
             </ul>
             <ul class="navbar-nav">
+            @can('system-only') {{-- システム管理者権限のみに表示される --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('gym.control') }}">管理者</a>
+                </li>
+            @endcan
             @guest
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

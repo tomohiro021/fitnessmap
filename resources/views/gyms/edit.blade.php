@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h2><a href="{{ route('gyms.index') }}">管理者ページ</a></h2>
-    <h3>Gyms更新ページ</h3>
+    <h3><a href="{{ route('gyms.index') }}">管理者ページ</a></h3>
+    <h4 class="text-secondary">Gyms更新ページ</h4>
     <table class="table table-sm">
         <form action="/gyms/{{ $gym->id }}" method="post">
             @method('PUT')
