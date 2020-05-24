@@ -1,14 +1,14 @@
-@extends('layouts.gym_home')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
     <h3><a href="{{ route('gyms.index') }}">管理者ページ</a></h3>
     <h4 class="text-secondary">Gyms詳細ページ</h4>
     <table class="table table-sm">
-       <tr>
-         <th>gym_content_id: </th>
-         <td>{{$gym->gym_content_id}}</td>
-       </tr>
+        <tr>
+            <th>id: </th>
+            <td>{{$gym->id}}</td>
+        </tr>
        <tr>
          <th>publication_status: </th>
          <td>{{$gym->publication_status}}</td>

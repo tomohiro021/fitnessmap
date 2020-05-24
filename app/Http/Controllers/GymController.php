@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Gym;
+use App\Enums\PublicationStatus;
 
 class GymController extends Controller
 {
@@ -38,6 +40,8 @@ class GymController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('system-only');
+
         $gym = Gym::find($id);
         return view('gyms.edit', ['gym' => $gym]);
     }
@@ -51,8 +55,9 @@ class GymController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('system-only');
+        
         $gym = Gym::find($id);
-        $gym->gym_content_id = $request->gym_content_id;
         $gym->publication_status = $request->publication_status;
         $gym->save();
         return redirect("/gyms/{$gym->id}");
@@ -66,6 +71,8 @@ class GymController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('system-only');
+
         $gym = Gym::find($id);
         $gym->delete();
         return redirect('/gyms'); 

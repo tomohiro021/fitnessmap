@@ -1,66 +1,53 @@
-@extends('layouts.gym_home')
+@extends('layouts.app')
 
+@section('header')
+<div class="container">
+    <div class="row">
+        <div class="col-md-4  img-hidden">
+            <a href="/images/stretching.jpg" data-lightbox="group"><img src="/images/stretching.jpg"  class="img-thumbnail float-right" width="400" height="400" alt=""></a>
+        </div>
+        <div class="col-md-8">
+            @if(Auth::user()->id === $gym_content->user_id)
+            <a href="/gym_contents/{{$gym_content->id}}/edit">編集</a>
+            @elseif($gym_content->user_id)
+            <p></p>
+            @else
+            <p></p>
+            @endif
+            <h2>{{ $gym_content->name }}</h2>
+            <h6 class="font-weight-bold text-secondary">住所</h6>
+            <p>
+                〒{{ $gym_content->zip_code }}<br>
+                {{ $gym_content->address->description }}
+                {{ $gym_content->address1 }}
+                {{ $gym_content->address2 }}
+            </p>
+            <h6 class="font-weight-bold text-secondary">カテゴリ</h6>
+            <p>
+                タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力<br>
+                タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力
+            </p>
+        </div>
+    </div>
+</div>
+@endsection
 @section('content')
 <div class="container">
-    <h3><a href="{{ route('gym_contents.index') }}">管理者ページ</a></h3>
-    <h4 class="text-secondary">GymContents詳細ページ</h3>
-    <table class="table table-sm">
-      <tr>
-        <th>id: </th>
-        <td>{{$gym_content->id}}</td>
-      </tr>
-      <tr>
-        <th>gym_id: </th>
-        <td>{{$gym_content->gym_id}}</td>
-      </tr>
-      <tr>
-        <th>user_id: </th>
-        <td>{{$gym_content->user_id}}</td>
-      </tr>
-      <tr>
-        <th>name: </th>
-        <td>{{$gym_content->name}}</td>
-      </tr>
-      <tr>
-        <th>zip_code: </th>
-        <td>{{$gym_content->zip_code}}</td>
-      </tr>
-      <tr>
-        <th>address: </th>
-        <td>{{$gym_content->address->description}}</td>
-      </tr>
-      <tr>
-        <th>address1: </th>
-        <td>{{$gym_content->address1}}</td>
-      </tr>
-      <tr>
-        <th>address2: </th>
-        <td>{{$gym_content->address2}}</td>
-      </tr>
-      <tr>
-        <th>lat: </th>
-        <td>{{$gym_content->lat}}</td>
-      </tr>
-      <tr>
-        <th>lng: </th>
-        <td>{{$gym_content->lng}}</td>
-      </tr>
-      <tr>
-        <th>summary: </th>
-        <td>{{$gym_content->summary}}</td>
-      </tr>
-      <tr>
-        <th>detail: </th>
-        <td>{{$gym_content->detail}}</td>
-      </tr>
-      <tr>
-        <th>status: </th>
-        <td>{{$gym_content->status->description}}</td>
-      </tr>
-      <tr>
-        <th></th>
-        <td><a href="/gym_contents/{{$gym_content->id}}/edit">編集</a></td>
-      </tr>
-    </table>
+    <h6 class="font-weight-bold text-secondary">説明文</h6>
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                {{ $gym_content->summary }}
+            </p>
+        </div>
+    </div>
+    <h6 class="font-weight-bold text-secondary">詳細説明文</h6>
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                {{ $gym_content->detail }}
+            </p>
+        </div>
+    </div>
 </div>
 @endsection

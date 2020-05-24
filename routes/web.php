@@ -19,17 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/', 'HomeController@index');
 
-// Route::get('/home', 'HomeController@index')->name('home.index');
+Route::get('/home', 'HomeController@index')->name('home.index');
 
-// 全ユーザー
-Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
-    //
-});
-
-//管理者以上
-Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
-    //
-});
 
 // システム管理者のみ
 Route::group(['middleware' => ['auth', 'can:system-only']], function () {
@@ -37,22 +28,11 @@ Route::group(['middleware' => ['auth', 'can:system-only']], function () {
 
 Auth::routes();
 
-//管理者ページ
-Route::get('/control', 'GymContentsController@control')->name('gym.control');
+Route::get('fitnessmap', 'FitnessmapController@index');
+
 //User：一覧・編集・削除
 Route::resource('users', 'UserController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
 //Gyms：一覧・編集・削除
 Route::resource('gyms', 'GymController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
 //GymContents：一覧・登録・編集・削除
 Route::resource('gym_contents', 'GymContentController');
-
-
-//ホームページ
-Route::get('/home', 'GymContentsController@home')->name('gym.home');
-//店舗紹介ページ
-Route::get('/info', 'GymContentsController@info')->name('gym.info');
-//新規投稿ページ
-Route::get('/form', 'GymContentsController@form')->name('gym.form')
-    ->middleware('auth');
-//送信完了ページ
-Route::post('/form/complete', 'GymContentsController@complete')->name('gym.complete');

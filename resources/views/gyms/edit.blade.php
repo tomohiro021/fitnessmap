@@ -1,4 +1,4 @@
-@extends('layouts.gym_home')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,10 +8,6 @@
         <form action="/gyms/{{ $gym->id }}" method="post">
             @method('PUT')
             @csrf
-            <tr>
-              <th>gym_content_id: </th>
-              <td><input type="text" name="gym_content_id" value="{{$gym->gym_content_id}}"></td>
-            </tr>
             <tr>
               <th>publication_status: </th>
               <td><input type="text" name="publication_status" value="{{$gym->publication_status}}"></td>

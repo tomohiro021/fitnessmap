@@ -9,9 +9,8 @@ use BenSampo\Enum\Contracts\LocalizedEnum;
  * @method static static Private()
  * @method static static Public()
  */
-final class Status extends Enum implements LocalizedEnum
+final class PublicationStatus extends Enum implements LocalizedEnum
 {
-    const Editting = 0;
-    const Applying = 1;
-    const Approved = 2;
+    const Private = 0;
+    const Public = 1;
 }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\PublictaionStatus;
 
 class Gym extends Model
 {
@@ -12,6 +13,19 @@ class Gym extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'gym_content_id', 'publication_status',
+        'publication_status',
+    ];
+    
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'publication_status' => 'int',
+    ];
+    
+    protected $enumCasts = [
+        'publication_status' => PublicationStatus::class,
     ];
 }

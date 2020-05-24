@@ -148,9 +148,11 @@ return [
     'attributes' => [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'user_id' => 'ユーザーID',
         'name' => '店舗名',
         'zip_code' => '郵便番号',
-        'address1' => '都道府県',
+        'address' => '都道府県',
+        'address1' => '市区町村',
         'address2' => '以降の住所',
         'summary' => '説明文',
         'detail' => '詳細説明',

@@ -1,8 +1,9 @@
 <?php
-
 use App\Enums\Gender;
 use App\Enums\Status;
 use App\Enums\Address;
+use App\Enums\PublicationStatus;
+
 
 return [
     Gender::class => [
@@ -10,16 +11,18 @@ return [
         Gender::Male => '男性',
         Gender::Female => '女性',
     ],
-];
-
-return [
+    
     Status::class => [
-        Status::Private => '非公開',
-        Status::Public => '公開',
+        Status::Editting => '編集中',
+        Status::Applying => '承認待ち',
+        Status::Approved => '承認済み',
     ],
-];
+    
+    PublicationStatus::class => [
+        PublicationStatus::Private => '非公開',
+        PublicationStatus::Public => '公開',
+    ],
 
-return [
     Address::class => [
         Address::Hokkaido => '北海道',
         Address::Aomori => '青森県',

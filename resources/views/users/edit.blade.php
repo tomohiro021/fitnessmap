@@ -1,4 +1,4 @@
-@extends('layouts.gym_home')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">

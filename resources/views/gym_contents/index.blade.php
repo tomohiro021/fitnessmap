@@ -1,10 +1,31 @@
-@extends('layouts.gym_home')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
     <h3><a href="#">管理者ページ</a></h3>
     <h4 class="text-secondary">Gym_contents</h4>
-    <a href = "{{ route('gym_contents.create') }}">新規作成</a>
+    <div class="form-group col-md-10">
+        <a href = "{{ route('gym_contents.create') }}">新規作成</a>
+    </div>
+    <form>
+        <div class="form-group col-md-10">
+            <label for="gym_id">gym_id</label>
+            <input type="text" class="form-control" name="gym_id" value="">
+        </div>
+        <div class="form-group col-md-10">
+            <label for="status">編集・承認待ち・承認済み</label>
+            {{ Form::select(
+              'status',
+              [null=>'選択してください']+App\Enums\Status::toSelectArray(),
+              '',
+              ['class'=>'form-control', 'id'=>'status']
+              )
+            }}
+        </div>
+        <div class="form-group col-md-10">
+            <input type="submit" class="form-control" value="検索">
+        </div>
+    </form>
     <table class="table table-sm">
         @foreach ($gym_contents as $gym_content)
         <tr>

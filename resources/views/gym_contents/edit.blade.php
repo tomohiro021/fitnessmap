@@ -1,4 +1,4 @@
-@extends('layouts.gym_home')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -7,14 +7,6 @@
   <form action="/gym_contents/{{ $gym_content->id }}" method="post">
     @method('PUT')
     @csrf
-    <div class="form-group col-md-10">
-      <label for="gym_id">ジムID</label>
-      <input id="gym_id" type="text" class="form-control"  name="gym_id" placeholder="GymIDを入力してください" value="{{$gym_content->gym_id}}">
-    </div>
-    <div class="form-group col-md-10">
-      <label for="user_id">ユーザーID</label>
-      <input id="user_id" type="text" class="form-control"  name="user_id" placeholder="UserIDを入力してください" value="{{$gym_content->user_id}}">
-    </div>
     <div class="form-group col-md-10">
       <label for="name">店舗名</label>
       <input id="name" type="text" class="form-control"  name="name" placeholder="店舗名を入力してください" value="{{$gym_content->name}}">
@@ -58,18 +50,20 @@
       <textarea id="detail" name="detail" rows="8" cols="80" class="form-control" >{{$gym_content->detail}}</textarea>
     </div>
     <div class="form-group col-md-10">
-      <label for="status">公開/非公開</label>
-      {{ Form::select(
-          'status',
-          App\Enums\Status::toSelectArray(),
-          $gym_content->status,
-          ['class'=>'form-control', 'id'=>'status']
-        )
-      }}
+      <label for="publication_status">非公開/公開</label>
+      <select name="" class="form-control" disabled>
+			<option value="">非公開</option>
+		  </select>
+      <p>※承認後、公開されます。</p>
     </div>
     <div class="form-group col-md-6">
       <label for="img1">施設の写真トップ</label>
       <input type="file" class="form-control-file" id="img1" name="img1" size="40" accept="image/*" >
+    </div>
+    <div class="form-group col-md-10">
+      <div class="text-center">
+        <label for="applying"><input type="checkbox" name="applying" value="applying" class="">承認申請を行う</label>
+      </div>
     </div>
     <div class="form-group col-md-10">
         <div class="text-center">
