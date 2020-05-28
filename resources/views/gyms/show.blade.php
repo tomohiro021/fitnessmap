@@ -18,5 +18,7 @@
          <td><a href="/gyms/{{$gym->id}}/edit">編集</a></td>
        </tr>
     </table>
+    <h4>現在公開中のコンテンツ</h4>
+    @include('gym_contents._content', ['gym_content'=>$gym_content])
 </div>
 @endsection

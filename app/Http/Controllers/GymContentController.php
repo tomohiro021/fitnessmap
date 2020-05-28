@@ -40,8 +40,7 @@ class GymContentController extends Controller
      */
     public function create()
     {
-        $user_id = Auth::id();
-        return view('gym_contents.create', ['user_id' => $user_id]);
+        return view('gym_contents.create');
     }
 
     /**
@@ -82,7 +81,7 @@ class GymContentController extends Controller
         $gym_content->lng = $request->input('lng');
         $gym_content->summary = $request->input('summary');
         $gym_content->detail = $request->input('detail');
-        $gym_content->status = ($request->input('applying') === 'applying') ? Status::Applying : Status::Editing;
+        $gym_content->status = ($request->input('applying') === 'applying') ? Status::Applying : Status::Editting;
       
         #Gymモデルクラスのsaveメソッドを実行
         $gym_content->save();
@@ -136,7 +135,6 @@ class GymContentController extends Controller
         $gym->publication_status = PublicationStatus::Private;
         $gym->save();
         
-        // $gym_content = GymContent::find($id);
         $gym_content = new GymContent();
         $gym_content->gym_id = $gym->id;
         $gym_content->user_id = Auth::id();

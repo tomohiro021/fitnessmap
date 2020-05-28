@@ -15,7 +15,6 @@
       </ul>
     </div>
     @endif
-    <input id="user_id" type="hidden" name="user_id" value='$user_id'>
     <div class="form-group col-md-10">
       <label for="name">店舗名</label>
       <input id="name" type="text" class="form-control"  name="name" placeholder="店舗名を入力してください" value="{{ old('name') }}">
