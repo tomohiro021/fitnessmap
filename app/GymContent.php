@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use BenSampo\Enum\Traits\CastsEnums;
 use App\Enums\Status;
 use App\Enums\Address;
+use App\User;
 use App\Gym;
+use App\Keyword;
 
 class GymContent extends Model
 {
@@ -41,5 +44,15 @@ class GymContent extends Model
     public function gym()
     {
         return $this->belongsTo(Gym::class);
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function keywords()
+    {
+        return $this->belongsToMany(Keyword::class, 'keyword_gym_content');
     }
 }

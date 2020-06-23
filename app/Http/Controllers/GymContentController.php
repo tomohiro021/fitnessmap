@@ -38,9 +38,33 @@ class GymContentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('gym_contents.create');
+        $gym_content = new GymContent();
+        $gym_content->user_id = Auth::id();
+        $gym_content->status = Status::Editting;
+        
+        $default_keywords = [];
+        
+        $source_gym_content_id = $request->source_gym_content_id;
+        if (!empty($source_gym_content_id)) {
+            $source = GymContent::find($source_gym_content_id);
+            
+            $gym_content->gym_id = $source->gym_id;
+            $gym_content->name = $source->name;
+            $gym_content->zip_code = $source->zip_code;
+            $gym_content->address = $source->address;
+            $gym_content->address1 = $source->address1;
+            $gym_content->address2 = $source->address2;
+            $gym_content->lat = $source->lat;
+            $gym_content->lng = $source->lng;
+            $gym_content->summary = $source->summary;
+            $gym_content->detail = $source->detail;
+            
+            // gym_contents.idが保存されていないと、saveやsyncが利用できないようなので、配列を渡す。
+            $default_keywords = $source->keywords()->get()->pluck('id')->toArray();
+        }
+        return view('gym_contents.create', compact('gym_content', 'default_keywords'));
     }
 
     /**
@@ -64,10 +88,15 @@ class GymContentController extends Controller
            'detail'  => 'required',
         ]);
       
-        // 新しいレコードの追加
-        $gym = new Gym();
-        $gym->publication_status = PublicationStatus::Private;
-        $gym->save();
+        $gym_id = $request->input('gym_id');
+        if (empty ($gym_id)) {
+            // 新しいレコードの追加
+            $gym = new Gym();
+            $gym->publication_status = PublicationStatus::Private;
+            $gym->save();
+        } else {
+            $gym = Gym::find($gym_id);
+        }
     
         $gym_content = new GymContent();
         $gym_content->gym_id = $gym->id;
@@ -83,19 +112,24 @@ class GymContentController extends Controller
         $gym_content->detail = $request->input('detail');
         $gym_content->status = ($request->input('applying') === 'applying') ? Status::Applying : Status::Editting;
       
-        #Gymモデルクラスのsaveメソッドを実行
-        $gym_content->save();
+        $gym_content->save();// Gymモデルクラスのsaveメソッドを実行
+
+        // gym_content.idが無いとキーワードの保存ができないのでsaveの後に実行する
+        $gym_content->keywords()->sync($request->keywords);
         
-        // アップロードしたファイル名を取得
-        $upload_name = $_FILES['img1']['name'];
-        //アップロードに成功しているか確認　>>>　保存
-        if ($request->file('img1')) {
-           $filename = $request->file('img1')->storeAs('', $upload_name, 'public');
-           return redirect('/gym_contents'); 
-        }else{
-           //送信完了ページのviewを表示
-           return redirect('/gym_contents'); 
-        }
+        return redirect()->route('gym_contents.show', $gym_content->id);
+        
+        // // アップロードに成功しているか確認　>>>　保存
+        // if ($request->file('img1')) {
+        //     $upload_name = $_FILES['img1']['name'];// アップロードしたファイル名を取得
+        //     $gym_content->upload_name = $request->$upload_name;
+        //     $request->file('img1')->storeAs('', $upload_name, 'public');
+        //     $gym_content->save();// Gymモデルクラスのsaveメソッドを実行
+        //     return redirect('/gym_contents');
+        // }else{
+        //     $gym_content->save();// Gymモデルクラスのsaveメソッドを実行
+        //     return redirect('/gym_contents');
+        // }
     }
 
     /**
@@ -107,7 +141,7 @@ class GymContentController extends Controller
     public function show($id)
     {
         $gym_content = GymContent::find($id);
-        return view('gym_contents.show', ['gym_content' => $gym_content]);
+        return view('gym_contents.show', compact('gym_content'));
     }
 
     /**
@@ -131,12 +165,21 @@ class GymContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $gym = new Gym();
-        $gym->publication_status = PublicationStatus::Private;
-        $gym->save();
+        //バリデーションを実行（結果に問題があれば処理を中断してエラーを返す）
+        $request->validate([
+           'name' => 'required',
+           'zip_code' => 'required',
+           'address'  => 'required',
+           'address1'  => 'required',
+           'address2'  => 'required',
+           'lat'  => 'required',
+           'lng'  => 'required',
+           'summary'  => 'required',
+           'detail'  => 'required',
+        ]);
         
-        $gym_content = new GymContent();
-        $gym_content->gym_id = $gym->id;
+        $gym_content = GymContent::find($id);
+        $gym_content->gym_id = $request->gym_id;
         $gym_content->user_id = Auth::id();
         $gym_content->name = $request->name;
         $gym_content->zip_code = $request->zip_code;
@@ -147,9 +190,13 @@ class GymContentController extends Controller
         $gym_content->lng = $request->lng;
         $gym_content->summary = $request->summary;
         $gym_content->detail = $request->detail;
-        $gym_content->status = ($request->input('applying') === 'applying') ? Status::Applying : Status::Editing;
+        $gym_content->status = ($request->input('applying') === 'applying') ? Status::Applying : Status::Editting;
+
+        $gym_content->keywords()->sync($request->keywords);        
+
         $gym_content->save();
-        return redirect("/gym_contents/{$gym_content->id}");
+        
+        return redirect()->route('gym_contents.show', $gym_content->id);
     }
 
     /**
@@ -163,5 +210,20 @@ class GymContentController extends Controller
         $gym_content = GymContent::find($id);
         $gym_content->delete();
         return redirect('/gym_contents'); 
+    }
+    
+    /**
+     * Approve GymContents.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function approve($id)
+    {
+        $gym_content = GymContent::find($id);
+        $gym_content->status = Status::Approved;
+        $gym_content->save();
+        
+        return redirect()->route('gyms.show', $gym_content->gym_id);
     }
 }

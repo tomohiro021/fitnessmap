@@ -14,7 +14,7 @@ return [
     
     Status::class => [
         Status::Editting => '編集中',
-        Status::Applying => '承認申請中',
+        Status::Applying => '承認待ち',
         Status::Approved => '承認済み',
     ],
     

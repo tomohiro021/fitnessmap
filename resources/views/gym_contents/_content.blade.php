@@ -12,10 +12,9 @@
                 {{ $gym_content->address1 }}
                 {{ $gym_content->address2 }}
             </p>
-            <h6 class="font-weight-bold text-secondary">カテゴリ</h6>
+            <h6 class="font-weight-bold text-secondary">キーワード</h6>
             <p>
-                タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力<br>
-                タグの入力タグの入力タグの入力タグの入力タグの入力タグの入力
+                {{ implode(', ', $gym_content->keywords()->get()->pluck('name')->toArray()) }}
             </p>
         </div>
     </div>

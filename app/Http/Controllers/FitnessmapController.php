@@ -3,23 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\GymContent;
-use App\Enum\Address;
+use Illuminate\Support\Facades\Auth;
+use App\Enums\Status;
 
 class FitnessmapController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function mypage(Request $request)
     {
-        $name = $request->name;
+        $gym_contents = Auth::user()->gymContents()
+        ->where('gym_contents.status', [Status::Editting, Status::Applying])
+        ->orderBy('updated_at')->get();
         
-        if ($name != '') {
-            $gym_contents = DB::table('gym_contents')->where('name','like','%'.$name.'%')->simplePaginate(10);
-        }else {
-            $gym_contents = DB::table('gym_contents')->simplePaginate(10);
-        }
-        
-        // $gym_contents = DB::table('gym_contents')->simplePaginate(10);
-        return view('fitnessmap.index', ['gym_contents' => $gym_contents]);
+        return view('fitnessmap.mypage', compact('gym_contents'));
     }
 }

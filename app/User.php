@@ -45,4 +45,9 @@ class User extends Authenticatable
     protected $enumCasts = [
         'gender' => Gender::class,
     ];
+    
+    public function gymContents()
+    {
+        return $this->hasMany(GymContent::class);
+    }
 }

@@ -10,14 +10,14 @@
     <title>FitnessMap</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ secure_asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     @yield('head')
 </head>
 <body>
@@ -25,7 +25,7 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-white rounded-bottom">
                 <div class="container">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="{{ route('gyms.index') }}">
                         {{ config('app.name', 'FitnessMap') }}
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -34,8 +34,8 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                              <a class="nav-link" href="#">home <span class="sr-only">(現位置)</span></a>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">home</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" href="#">link</a>
@@ -54,6 +54,14 @@
                         </ul>
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
+                            @if (Auth::check()) {{-- ログインユーザーのみに表示される --}}
+                                <li class="nav-item">
+                                 <a class="nav-link" href="{{ route('gym_contents.create') }}">新規作成</a>
+                                </li>
+                                <li class="nav-item">
+                                 <a class="nav-link" href="{{ route('fitnessmap.mypage') }}">マイページ</a>
+                                </li>
+                            @endif
                             @can('system-only') {{-- システム管理者権限のみに表示される --}}
                                 <li class="nav-item">
                                  <a class="nav-link" href="#">管理者</a>

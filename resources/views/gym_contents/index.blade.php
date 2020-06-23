@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-    <h3><a href="#">管理者ページ</a></h3>
     <h4 class="text-secondary">Gym_contents</h4>
     <div class="form-group col-md-10">
         <a href = "{{ route('gym_contents.create') }}">新規作成</a>

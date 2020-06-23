@@ -18,21 +18,22 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Route::get('/', 'HomeController@index');
-
 Route::get('/home', 'HomeController@index')->name('home.index');
+Route::get('/mypage', 'FitnessmapController@mypage')->name('fitnessmap.mypage')->middleware('auth');
 
-
-// システム管理者のみ
-Route::group(['middleware' => ['auth', 'can:system-only']], function () {
-});
 
 Auth::routes();
 
-Route::get('fitnessmap', 'FitnessmapController@index');
-
-//User：一覧・編集・削除
+// システム管理者のみ
+Route::group(['middleware' => ['auth', 'can:system-only']], function () {
+// User：一覧・編集・削除
 Route::resource('users', 'UserController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
-//Gyms：一覧・編集・削除
+// Keywords：一覧・登録・編集・削除
+Route::resource('keywords', 'KeywordController');
+});
+
+// Gyms：一覧・編集・削除
 Route::resource('gyms', 'GymController', ['only' => [ 'index', 'show', 'edit','update','destroy']]);
-//GymContents：一覧・登録・編集・削除
-Route::resource('gym_contents', 'GymContentController');
+// GymContents：一覧・登録・編集・削除
+Route::get('/gym_contents/{id}/approve', 'GymContentController@approve')->name('gym_contents.approve');
+Route::resource('gym_contents', 'GymContentController')->middleware('auth');

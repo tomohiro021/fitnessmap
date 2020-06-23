@@ -61,7 +61,10 @@
     </div>
         <div class="form-group col-md-12">
             <div class="text-center">
-                <label for="Approved"><input type="checkbox" name="Approved" value="Approved" class="">承認する</label>
+                <label class="form-check-label">
+                  <input type="checkbox" name="Approved" value="Approved" class="form-check-input">
+                  <span class="text-success font-weight-bold">承認する</span>
+                </label>
             </div>
         </div>
         <div class="form-group col-md-12">

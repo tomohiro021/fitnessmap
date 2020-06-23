@@ -50,14 +50,14 @@ class Gym extends Model
     
     public function noapprovedGymContent()
     {
-        return $this->gymContents()->where('gym_contents.status', Status::Editting or Status::Applying)->orderByRaw('gym_contents.updated_at DESC')->first();
-        // $user_id = Auth::id();
-        // return $this->gymContents()->where('gym_contents.user_id', $user_id)->where('gym_contents.status', Status::Editting or Status::Applying)->first();
-    }
-    
-    public function userNoapprovedGymContent()
-    {
         $user_id = Auth::id();
-        return $this->gymContents()->where('gym_contents.user_id', $user_id)->where('gym_contents.status', Status::Editting or Status::Applying)->first();
+        
+        return $this->gymContents()->where('gym_contents.user_id', $user_id)
+        ->where('gym_contents.status', [
+            Status::Editting,
+            Status::Applying,
+        ])
+        ->orderByRaw('gym_contents.updated_at DESC')
+        ->first();
     }
 }

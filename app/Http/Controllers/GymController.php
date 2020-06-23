@@ -9,6 +9,7 @@ use App\GymContent;
 use App\Enums\PublicationStatus;
 use App\Enums\Status;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class GymController extends Controller
 {
@@ -17,10 +18,46 @@ class GymController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $gyms = Gym::orderBy('id')->get();
-        return view('gyms.index', ['gyms' => $gyms]);
+        $name = $request->name;
+
+        $sql = <<<EOS
+SELECT
+    gyms.id AS gym_id,
+    gyms.publication_status AS publication_status,
+    gym_contents.id AS gym_content_id,
+    gym_contents.*
+FROM gyms
+INNER JOIN (
+    SELECT * FROM gym_contents WHERE (gym_id, updated_at) IN (
+        SELECT gym_id, MAX(updated_at) AS updated_at FROM gym_contents where status=2 GROUP BY gym_id
+    )
+) gym_contents ON gyms.id=gym_contents.gym_id
+WHERE gyms.publication_status=1 AND gym_contents.name LIKE ?
+EOS;
+        $gyms = DB::select($sql, ["%${name}%"]);
+
+        $editting_gym_contents = Auth::user()->gymContents()
+            ->whereIn('gym_contents.status', [Status::Editting, Status::Applying])
+            ->orderBy('updated_at', 'DESC')->get();
+
+        // if (Auth::check()) {
+        //     $gym_contents = Auth::user()->gymContents()
+        //     ->where('gym_contents.status', [Status::Editting, Status::Applying])
+        //     ->orderBy('updated_at')->get();
+            
+        //     $data = array(
+        //         'gyms' => $gyms,
+        //         'gym_contents' => $gym_contents,
+        //     );
+        // } else {
+        //     $data = array(
+        //         'gyms' => $gyms,
+        //     );
+        // }
+        
+        return view('gyms.index', compact('gyms', 'editting_gym_contents'));
     }
 
     /**
@@ -32,8 +69,14 @@ class GymController extends Controller
     public function show($id)
     {
         $gym = Gym::find($id);
-        $gym_content = GymContent::where('gym_id', '=', $id)->first();
-        return view('gyms.show', ['gym' => $gym, 'gym_content' => $gym_content]);
+        $gym_content = $gym->publicatedGymContent();
+
+        $editting_gym_content = Auth::user()->gymContents()
+            ->where('gym_contents.gym_id', $id)
+            ->whereIn('gym_contents.status', [Status::Editting, Status::Applying])
+            ->orderBy('updated_at', 'DESC')->first();
+
+        return view('gyms.show', compact('gym','gym_content', 'editting_gym_content'));
     }
 
     /**

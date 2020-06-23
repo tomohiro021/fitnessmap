@@ -40,10 +40,10 @@ class LoginController extends Controller
     }
     protected function loggedOut(Request $request)
     {
-        return redirect('fitnessmap');
+        return redirect('gyms');
     }
     public function redirectPath()
     {
-        return 'fitnessmap';
+        return 'gyms';
     }
 }
